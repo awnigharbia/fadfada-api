@@ -1,0 +1,2404 @@
+type AggregateComment {
+  count: Int!
+}
+
+type AggregateFeedback {
+  count: Int!
+}
+
+type AggregateHashtag {
+  count: Int!
+}
+
+type AggregateInfo {
+  count: Int!
+}
+
+type AggregateLike {
+  count: Int!
+}
+
+type AggregateMessage {
+  count: Int!
+}
+
+type AggregateNotification {
+  count: Int!
+}
+
+type AggregateStory {
+  count: Int!
+}
+
+type AggregateStoryReport {
+  count: Int!
+}
+
+type AggregateUser {
+  count: Int!
+}
+
+type AggregateVideo {
+  count: Int!
+}
+
+type BatchPayload {
+  count: Long!
+}
+
+type Comment {
+  id: ID!
+  body: String!
+  story: Story!
+  commentedBy: User!
+}
+
+type CommentConnection {
+  pageInfo: PageInfo!
+  edges: [CommentEdge]!
+  aggregate: AggregateComment!
+}
+
+input CommentCreateInput {
+  body: String!
+  story: StoryCreateOneWithoutCommentsInput!
+  commentedBy: UserCreateOneInput!
+}
+
+input CommentCreateManyWithoutStoryInput {
+  create: [CommentCreateWithoutStoryInput!]
+  connect: [CommentWhereUniqueInput!]
+}
+
+input CommentCreateWithoutStoryInput {
+  body: String!
+  commentedBy: UserCreateOneInput!
+}
+
+type CommentEdge {
+  node: Comment!
+  cursor: String!
+}
+
+enum CommentOrderByInput {
+  id_ASC
+  id_DESC
+  body_ASC
+  body_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type CommentPreviousValues {
+  id: ID!
+  body: String!
+}
+
+input CommentScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  body: String
+  body_not: String
+  body_in: [String!]
+  body_not_in: [String!]
+  body_lt: String
+  body_lte: String
+  body_gt: String
+  body_gte: String
+  body_contains: String
+  body_not_contains: String
+  body_starts_with: String
+  body_not_starts_with: String
+  body_ends_with: String
+  body_not_ends_with: String
+  AND: [CommentScalarWhereInput!]
+  OR: [CommentScalarWhereInput!]
+  NOT: [CommentScalarWhereInput!]
+}
+
+type CommentSubscriptionPayload {
+  mutation: MutationType!
+  node: Comment
+  updatedFields: [String!]
+  previousValues: CommentPreviousValues
+}
+
+input CommentSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: CommentWhereInput
+  AND: [CommentSubscriptionWhereInput!]
+  OR: [CommentSubscriptionWhereInput!]
+  NOT: [CommentSubscriptionWhereInput!]
+}
+
+input CommentUpdateInput {
+  body: String
+  story: StoryUpdateOneRequiredWithoutCommentsInput
+  commentedBy: UserUpdateOneRequiredInput
+}
+
+input CommentUpdateManyDataInput {
+  body: String
+}
+
+input CommentUpdateManyMutationInput {
+  body: String
+}
+
+input CommentUpdateManyWithoutStoryInput {
+  create: [CommentCreateWithoutStoryInput!]
+  delete: [CommentWhereUniqueInput!]
+  connect: [CommentWhereUniqueInput!]
+  set: [CommentWhereUniqueInput!]
+  disconnect: [CommentWhereUniqueInput!]
+  update: [CommentUpdateWithWhereUniqueWithoutStoryInput!]
+  upsert: [CommentUpsertWithWhereUniqueWithoutStoryInput!]
+  deleteMany: [CommentScalarWhereInput!]
+  updateMany: [CommentUpdateManyWithWhereNestedInput!]
+}
+
+input CommentUpdateManyWithWhereNestedInput {
+  where: CommentScalarWhereInput!
+  data: CommentUpdateManyDataInput!
+}
+
+input CommentUpdateWithoutStoryDataInput {
+  body: String
+  commentedBy: UserUpdateOneRequiredInput
+}
+
+input CommentUpdateWithWhereUniqueWithoutStoryInput {
+  where: CommentWhereUniqueInput!
+  data: CommentUpdateWithoutStoryDataInput!
+}
+
+input CommentUpsertWithWhereUniqueWithoutStoryInput {
+  where: CommentWhereUniqueInput!
+  update: CommentUpdateWithoutStoryDataInput!
+  create: CommentCreateWithoutStoryInput!
+}
+
+input CommentWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  body: String
+  body_not: String
+  body_in: [String!]
+  body_not_in: [String!]
+  body_lt: String
+  body_lte: String
+  body_gt: String
+  body_gte: String
+  body_contains: String
+  body_not_contains: String
+  body_starts_with: String
+  body_not_starts_with: String
+  body_ends_with: String
+  body_not_ends_with: String
+  story: StoryWhereInput
+  commentedBy: UserWhereInput
+  AND: [CommentWhereInput!]
+  OR: [CommentWhereInput!]
+  NOT: [CommentWhereInput!]
+}
+
+input CommentWhereUniqueInput {
+  id: ID
+}
+
+type Feedback {
+  id: ID!
+  title: String!
+  description: String!
+  sentBy: User
+}
+
+type FeedbackConnection {
+  pageInfo: PageInfo!
+  edges: [FeedbackEdge]!
+  aggregate: AggregateFeedback!
+}
+
+input FeedbackCreateInput {
+  title: String!
+  description: String!
+  sentBy: UserCreateOneInput
+}
+
+type FeedbackEdge {
+  node: Feedback!
+  cursor: String!
+}
+
+enum FeedbackOrderByInput {
+  id_ASC
+  id_DESC
+  title_ASC
+  title_DESC
+  description_ASC
+  description_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type FeedbackPreviousValues {
+  id: ID!
+  title: String!
+  description: String!
+}
+
+type FeedbackSubscriptionPayload {
+  mutation: MutationType!
+  node: Feedback
+  updatedFields: [String!]
+  previousValues: FeedbackPreviousValues
+}
+
+input FeedbackSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: FeedbackWhereInput
+  AND: [FeedbackSubscriptionWhereInput!]
+  OR: [FeedbackSubscriptionWhereInput!]
+  NOT: [FeedbackSubscriptionWhereInput!]
+}
+
+input FeedbackUpdateInput {
+  title: String
+  description: String
+  sentBy: UserUpdateOneInput
+}
+
+input FeedbackUpdateManyMutationInput {
+  title: String
+  description: String
+}
+
+input FeedbackWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  sentBy: UserWhereInput
+  AND: [FeedbackWhereInput!]
+  OR: [FeedbackWhereInput!]
+  NOT: [FeedbackWhereInput!]
+}
+
+input FeedbackWhereUniqueInput {
+  id: ID
+}
+
+type Hashtag {
+  id: ID!
+  title: String!
+  moderator: User!
+  addedBy: User!
+}
+
+type HashtagConnection {
+  pageInfo: PageInfo!
+  edges: [HashtagEdge]!
+  aggregate: AggregateHashtag!
+}
+
+input HashtagCreateInput {
+  title: String!
+  moderator: UserCreateOneWithoutHashtagsInput!
+  addedBy: UserCreateOneInput!
+}
+
+input HashtagCreateManyInput {
+  create: [HashtagCreateInput!]
+  connect: [HashtagWhereUniqueInput!]
+}
+
+input HashtagCreateManyWithoutModeratorInput {
+  create: [HashtagCreateWithoutModeratorInput!]
+  connect: [HashtagWhereUniqueInput!]
+}
+
+input HashtagCreateWithoutModeratorInput {
+  title: String!
+  addedBy: UserCreateOneInput!
+}
+
+type HashtagEdge {
+  node: Hashtag!
+  cursor: String!
+}
+
+enum HashtagOrderByInput {
+  id_ASC
+  id_DESC
+  title_ASC
+  title_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type HashtagPreviousValues {
+  id: ID!
+  title: String!
+}
+
+input HashtagScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  AND: [HashtagScalarWhereInput!]
+  OR: [HashtagScalarWhereInput!]
+  NOT: [HashtagScalarWhereInput!]
+}
+
+type HashtagSubscriptionPayload {
+  mutation: MutationType!
+  node: Hashtag
+  updatedFields: [String!]
+  previousValues: HashtagPreviousValues
+}
+
+input HashtagSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: HashtagWhereInput
+  AND: [HashtagSubscriptionWhereInput!]
+  OR: [HashtagSubscriptionWhereInput!]
+  NOT: [HashtagSubscriptionWhereInput!]
+}
+
+input HashtagUpdateDataInput {
+  title: String
+  moderator: UserUpdateOneRequiredWithoutHashtagsInput
+  addedBy: UserUpdateOneRequiredInput
+}
+
+input HashtagUpdateInput {
+  title: String
+  moderator: UserUpdateOneRequiredWithoutHashtagsInput
+  addedBy: UserUpdateOneRequiredInput
+}
+
+input HashtagUpdateManyDataInput {
+  title: String
+}
+
+input HashtagUpdateManyInput {
+  create: [HashtagCreateInput!]
+  update: [HashtagUpdateWithWhereUniqueNestedInput!]
+  upsert: [HashtagUpsertWithWhereUniqueNestedInput!]
+  delete: [HashtagWhereUniqueInput!]
+  connect: [HashtagWhereUniqueInput!]
+  set: [HashtagWhereUniqueInput!]
+  disconnect: [HashtagWhereUniqueInput!]
+  deleteMany: [HashtagScalarWhereInput!]
+  updateMany: [HashtagUpdateManyWithWhereNestedInput!]
+}
+
+input HashtagUpdateManyMutationInput {
+  title: String
+}
+
+input HashtagUpdateManyWithoutModeratorInput {
+  create: [HashtagCreateWithoutModeratorInput!]
+  delete: [HashtagWhereUniqueInput!]
+  connect: [HashtagWhereUniqueInput!]
+  set: [HashtagWhereUniqueInput!]
+  disconnect: [HashtagWhereUniqueInput!]
+  update: [HashtagUpdateWithWhereUniqueWithoutModeratorInput!]
+  upsert: [HashtagUpsertWithWhereUniqueWithoutModeratorInput!]
+  deleteMany: [HashtagScalarWhereInput!]
+  updateMany: [HashtagUpdateManyWithWhereNestedInput!]
+}
+
+input HashtagUpdateManyWithWhereNestedInput {
+  where: HashtagScalarWhereInput!
+  data: HashtagUpdateManyDataInput!
+}
+
+input HashtagUpdateWithoutModeratorDataInput {
+  title: String
+  addedBy: UserUpdateOneRequiredInput
+}
+
+input HashtagUpdateWithWhereUniqueNestedInput {
+  where: HashtagWhereUniqueInput!
+  data: HashtagUpdateDataInput!
+}
+
+input HashtagUpdateWithWhereUniqueWithoutModeratorInput {
+  where: HashtagWhereUniqueInput!
+  data: HashtagUpdateWithoutModeratorDataInput!
+}
+
+input HashtagUpsertWithWhereUniqueNestedInput {
+  where: HashtagWhereUniqueInput!
+  update: HashtagUpdateDataInput!
+  create: HashtagCreateInput!
+}
+
+input HashtagUpsertWithWhereUniqueWithoutModeratorInput {
+  where: HashtagWhereUniqueInput!
+  update: HashtagUpdateWithoutModeratorDataInput!
+  create: HashtagCreateWithoutModeratorInput!
+}
+
+input HashtagWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  moderator: UserWhereInput
+  addedBy: UserWhereInput
+  AND: [HashtagWhereInput!]
+  OR: [HashtagWhereInput!]
+  NOT: [HashtagWhereInput!]
+}
+
+input HashtagWhereUniqueInput {
+  id: ID
+}
+
+type Info {
+  id: ID!
+  browser: String!
+  ip: String!
+  os: String!
+  country: String!
+  language: String!
+  zip: String!
+}
+
+type InfoConnection {
+  pageInfo: PageInfo!
+  edges: [InfoEdge]!
+  aggregate: AggregateInfo!
+}
+
+input InfoCreateInput {
+  browser: String!
+  ip: String!
+  os: String!
+  country: String!
+  language: String!
+  zip: String!
+}
+
+input InfoCreateManyInput {
+  create: [InfoCreateInput!]
+  connect: [InfoWhereUniqueInput!]
+}
+
+type InfoEdge {
+  node: Info!
+  cursor: String!
+}
+
+enum InfoOrderByInput {
+  id_ASC
+  id_DESC
+  browser_ASC
+  browser_DESC
+  ip_ASC
+  ip_DESC
+  os_ASC
+  os_DESC
+  country_ASC
+  country_DESC
+  language_ASC
+  language_DESC
+  zip_ASC
+  zip_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type InfoPreviousValues {
+  id: ID!
+  browser: String!
+  ip: String!
+  os: String!
+  country: String!
+  language: String!
+  zip: String!
+}
+
+input InfoScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  browser: String
+  browser_not: String
+  browser_in: [String!]
+  browser_not_in: [String!]
+  browser_lt: String
+  browser_lte: String
+  browser_gt: String
+  browser_gte: String
+  browser_contains: String
+  browser_not_contains: String
+  browser_starts_with: String
+  browser_not_starts_with: String
+  browser_ends_with: String
+  browser_not_ends_with: String
+  ip: String
+  ip_not: String
+  ip_in: [String!]
+  ip_not_in: [String!]
+  ip_lt: String
+  ip_lte: String
+  ip_gt: String
+  ip_gte: String
+  ip_contains: String
+  ip_not_contains: String
+  ip_starts_with: String
+  ip_not_starts_with: String
+  ip_ends_with: String
+  ip_not_ends_with: String
+  os: String
+  os_not: String
+  os_in: [String!]
+  os_not_in: [String!]
+  os_lt: String
+  os_lte: String
+  os_gt: String
+  os_gte: String
+  os_contains: String
+  os_not_contains: String
+  os_starts_with: String
+  os_not_starts_with: String
+  os_ends_with: String
+  os_not_ends_with: String
+  country: String
+  country_not: String
+  country_in: [String!]
+  country_not_in: [String!]
+  country_lt: String
+  country_lte: String
+  country_gt: String
+  country_gte: String
+  country_contains: String
+  country_not_contains: String
+  country_starts_with: String
+  country_not_starts_with: String
+  country_ends_with: String
+  country_not_ends_with: String
+  language: String
+  language_not: String
+  language_in: [String!]
+  language_not_in: [String!]
+  language_lt: String
+  language_lte: String
+  language_gt: String
+  language_gte: String
+  language_contains: String
+  language_not_contains: String
+  language_starts_with: String
+  language_not_starts_with: String
+  language_ends_with: String
+  language_not_ends_with: String
+  zip: String
+  zip_not: String
+  zip_in: [String!]
+  zip_not_in: [String!]
+  zip_lt: String
+  zip_lte: String
+  zip_gt: String
+  zip_gte: String
+  zip_contains: String
+  zip_not_contains: String
+  zip_starts_with: String
+  zip_not_starts_with: String
+  zip_ends_with: String
+  zip_not_ends_with: String
+  AND: [InfoScalarWhereInput!]
+  OR: [InfoScalarWhereInput!]
+  NOT: [InfoScalarWhereInput!]
+}
+
+type InfoSubscriptionPayload {
+  mutation: MutationType!
+  node: Info
+  updatedFields: [String!]
+  previousValues: InfoPreviousValues
+}
+
+input InfoSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: InfoWhereInput
+  AND: [InfoSubscriptionWhereInput!]
+  OR: [InfoSubscriptionWhereInput!]
+  NOT: [InfoSubscriptionWhereInput!]
+}
+
+input InfoUpdateDataInput {
+  browser: String
+  ip: String
+  os: String
+  country: String
+  language: String
+  zip: String
+}
+
+input InfoUpdateInput {
+  browser: String
+  ip: String
+  os: String
+  country: String
+  language: String
+  zip: String
+}
+
+input InfoUpdateManyDataInput {
+  browser: String
+  ip: String
+  os: String
+  country: String
+  language: String
+  zip: String
+}
+
+input InfoUpdateManyInput {
+  create: [InfoCreateInput!]
+  update: [InfoUpdateWithWhereUniqueNestedInput!]
+  upsert: [InfoUpsertWithWhereUniqueNestedInput!]
+  delete: [InfoWhereUniqueInput!]
+  connect: [InfoWhereUniqueInput!]
+  set: [InfoWhereUniqueInput!]
+  disconnect: [InfoWhereUniqueInput!]
+  deleteMany: [InfoScalarWhereInput!]
+  updateMany: [InfoUpdateManyWithWhereNestedInput!]
+}
+
+input InfoUpdateManyMutationInput {
+  browser: String
+  ip: String
+  os: String
+  country: String
+  language: String
+  zip: String
+}
+
+input InfoUpdateManyWithWhereNestedInput {
+  where: InfoScalarWhereInput!
+  data: InfoUpdateManyDataInput!
+}
+
+input InfoUpdateWithWhereUniqueNestedInput {
+  where: InfoWhereUniqueInput!
+  data: InfoUpdateDataInput!
+}
+
+input InfoUpsertWithWhereUniqueNestedInput {
+  where: InfoWhereUniqueInput!
+  update: InfoUpdateDataInput!
+  create: InfoCreateInput!
+}
+
+input InfoWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  browser: String
+  browser_not: String
+  browser_in: [String!]
+  browser_not_in: [String!]
+  browser_lt: String
+  browser_lte: String
+  browser_gt: String
+  browser_gte: String
+  browser_contains: String
+  browser_not_contains: String
+  browser_starts_with: String
+  browser_not_starts_with: String
+  browser_ends_with: String
+  browser_not_ends_with: String
+  ip: String
+  ip_not: String
+  ip_in: [String!]
+  ip_not_in: [String!]
+  ip_lt: String
+  ip_lte: String
+  ip_gt: String
+  ip_gte: String
+  ip_contains: String
+  ip_not_contains: String
+  ip_starts_with: String
+  ip_not_starts_with: String
+  ip_ends_with: String
+  ip_not_ends_with: String
+  os: String
+  os_not: String
+  os_in: [String!]
+  os_not_in: [String!]
+  os_lt: String
+  os_lte: String
+  os_gt: String
+  os_gte: String
+  os_contains: String
+  os_not_contains: String
+  os_starts_with: String
+  os_not_starts_with: String
+  os_ends_with: String
+  os_not_ends_with: String
+  country: String
+  country_not: String
+  country_in: [String!]
+  country_not_in: [String!]
+  country_lt: String
+  country_lte: String
+  country_gt: String
+  country_gte: String
+  country_contains: String
+  country_not_contains: String
+  country_starts_with: String
+  country_not_starts_with: String
+  country_ends_with: String
+  country_not_ends_with: String
+  language: String
+  language_not: String
+  language_in: [String!]
+  language_not_in: [String!]
+  language_lt: String
+  language_lte: String
+  language_gt: String
+  language_gte: String
+  language_contains: String
+  language_not_contains: String
+  language_starts_with: String
+  language_not_starts_with: String
+  language_ends_with: String
+  language_not_ends_with: String
+  zip: String
+  zip_not: String
+  zip_in: [String!]
+  zip_not_in: [String!]
+  zip_lt: String
+  zip_lte: String
+  zip_gt: String
+  zip_gte: String
+  zip_contains: String
+  zip_not_contains: String
+  zip_starts_with: String
+  zip_not_starts_with: String
+  zip_ends_with: String
+  zip_not_ends_with: String
+  AND: [InfoWhereInput!]
+  OR: [InfoWhereInput!]
+  NOT: [InfoWhereInput!]
+}
+
+input InfoWhereUniqueInput {
+  id: ID
+}
+
+type Like {
+  id: ID!
+  story: Story!
+  likedBy: User!
+}
+
+type LikeConnection {
+  pageInfo: PageInfo!
+  edges: [LikeEdge]!
+  aggregate: AggregateLike!
+}
+
+input LikeCreateInput {
+  story: StoryCreateOneWithoutLikesInput!
+  likedBy: UserCreateOneInput!
+}
+
+input LikeCreateManyWithoutStoryInput {
+  create: [LikeCreateWithoutStoryInput!]
+  connect: [LikeWhereUniqueInput!]
+}
+
+input LikeCreateWithoutStoryInput {
+  likedBy: UserCreateOneInput!
+}
+
+type LikeEdge {
+  node: Like!
+  cursor: String!
+}
+
+enum LikeOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type LikePreviousValues {
+  id: ID!
+}
+
+input LikeScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  AND: [LikeScalarWhereInput!]
+  OR: [LikeScalarWhereInput!]
+  NOT: [LikeScalarWhereInput!]
+}
+
+type LikeSubscriptionPayload {
+  mutation: MutationType!
+  node: Like
+  updatedFields: [String!]
+  previousValues: LikePreviousValues
+}
+
+input LikeSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: LikeWhereInput
+  AND: [LikeSubscriptionWhereInput!]
+  OR: [LikeSubscriptionWhereInput!]
+  NOT: [LikeSubscriptionWhereInput!]
+}
+
+input LikeUpdateInput {
+  story: StoryUpdateOneRequiredWithoutLikesInput
+  likedBy: UserUpdateOneRequiredInput
+}
+
+input LikeUpdateManyWithoutStoryInput {
+  create: [LikeCreateWithoutStoryInput!]
+  delete: [LikeWhereUniqueInput!]
+  connect: [LikeWhereUniqueInput!]
+  set: [LikeWhereUniqueInput!]
+  disconnect: [LikeWhereUniqueInput!]
+  update: [LikeUpdateWithWhereUniqueWithoutStoryInput!]
+  upsert: [LikeUpsertWithWhereUniqueWithoutStoryInput!]
+  deleteMany: [LikeScalarWhereInput!]
+}
+
+input LikeUpdateWithoutStoryDataInput {
+  likedBy: UserUpdateOneRequiredInput
+}
+
+input LikeUpdateWithWhereUniqueWithoutStoryInput {
+  where: LikeWhereUniqueInput!
+  data: LikeUpdateWithoutStoryDataInput!
+}
+
+input LikeUpsertWithWhereUniqueWithoutStoryInput {
+  where: LikeWhereUniqueInput!
+  update: LikeUpdateWithoutStoryDataInput!
+  create: LikeCreateWithoutStoryInput!
+}
+
+input LikeWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  story: StoryWhereInput
+  likedBy: UserWhereInput
+  AND: [LikeWhereInput!]
+  OR: [LikeWhereInput!]
+  NOT: [LikeWhereInput!]
+}
+
+input LikeWhereUniqueInput {
+  id: ID
+}
+
+scalar Long
+
+type Message {
+  id: ID!
+  body: String!
+  sentBy: User!
+}
+
+type MessageConnection {
+  pageInfo: PageInfo!
+  edges: [MessageEdge]!
+  aggregate: AggregateMessage!
+}
+
+input MessageCreateInput {
+  body: String!
+  sentBy: UserCreateOneInput!
+}
+
+type MessageEdge {
+  node: Message!
+  cursor: String!
+}
+
+enum MessageOrderByInput {
+  id_ASC
+  id_DESC
+  body_ASC
+  body_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type MessagePreviousValues {
+  id: ID!
+  body: String!
+}
+
+type MessageSubscriptionPayload {
+  mutation: MutationType!
+  node: Message
+  updatedFields: [String!]
+  previousValues: MessagePreviousValues
+}
+
+input MessageSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: MessageWhereInput
+  AND: [MessageSubscriptionWhereInput!]
+  OR: [MessageSubscriptionWhereInput!]
+  NOT: [MessageSubscriptionWhereInput!]
+}
+
+input MessageUpdateInput {
+  body: String
+  sentBy: UserUpdateOneRequiredInput
+}
+
+input MessageUpdateManyMutationInput {
+  body: String
+}
+
+input MessageWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  body: String
+  body_not: String
+  body_in: [String!]
+  body_not_in: [String!]
+  body_lt: String
+  body_lte: String
+  body_gt: String
+  body_gte: String
+  body_contains: String
+  body_not_contains: String
+  body_starts_with: String
+  body_not_starts_with: String
+  body_ends_with: String
+  body_not_ends_with: String
+  sentBy: UserWhereInput
+  AND: [MessageWhereInput!]
+  OR: [MessageWhereInput!]
+  NOT: [MessageWhereInput!]
+}
+
+input MessageWhereUniqueInput {
+  id: ID
+}
+
+type Mutation {
+  createComment(data: CommentCreateInput!): Comment!
+  updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment
+  updateManyComments(data: CommentUpdateManyMutationInput!, where: CommentWhereInput): BatchPayload!
+  upsertComment(where: CommentWhereUniqueInput!, create: CommentCreateInput!, update: CommentUpdateInput!): Comment!
+  deleteComment(where: CommentWhereUniqueInput!): Comment
+  deleteManyComments(where: CommentWhereInput): BatchPayload!
+  createFeedback(data: FeedbackCreateInput!): Feedback!
+  updateFeedback(data: FeedbackUpdateInput!, where: FeedbackWhereUniqueInput!): Feedback
+  updateManyFeedbacks(data: FeedbackUpdateManyMutationInput!, where: FeedbackWhereInput): BatchPayload!
+  upsertFeedback(where: FeedbackWhereUniqueInput!, create: FeedbackCreateInput!, update: FeedbackUpdateInput!): Feedback!
+  deleteFeedback(where: FeedbackWhereUniqueInput!): Feedback
+  deleteManyFeedbacks(where: FeedbackWhereInput): BatchPayload!
+  createHashtag(data: HashtagCreateInput!): Hashtag!
+  updateHashtag(data: HashtagUpdateInput!, where: HashtagWhereUniqueInput!): Hashtag
+  updateManyHashtags(data: HashtagUpdateManyMutationInput!, where: HashtagWhereInput): BatchPayload!
+  upsertHashtag(where: HashtagWhereUniqueInput!, create: HashtagCreateInput!, update: HashtagUpdateInput!): Hashtag!
+  deleteHashtag(where: HashtagWhereUniqueInput!): Hashtag
+  deleteManyHashtags(where: HashtagWhereInput): BatchPayload!
+  createInfo(data: InfoCreateInput!): Info!
+  updateInfo(data: InfoUpdateInput!, where: InfoWhereUniqueInput!): Info
+  updateManyInfoes(data: InfoUpdateManyMutationInput!, where: InfoWhereInput): BatchPayload!
+  upsertInfo(where: InfoWhereUniqueInput!, create: InfoCreateInput!, update: InfoUpdateInput!): Info!
+  deleteInfo(where: InfoWhereUniqueInput!): Info
+  deleteManyInfoes(where: InfoWhereInput): BatchPayload!
+  createLike(data: LikeCreateInput!): Like!
+  updateLike(data: LikeUpdateInput!, where: LikeWhereUniqueInput!): Like
+  upsertLike(where: LikeWhereUniqueInput!, create: LikeCreateInput!, update: LikeUpdateInput!): Like!
+  deleteLike(where: LikeWhereUniqueInput!): Like
+  deleteManyLikes(where: LikeWhereInput): BatchPayload!
+  createMessage(data: MessageCreateInput!): Message!
+  updateMessage(data: MessageUpdateInput!, where: MessageWhereUniqueInput!): Message
+  updateManyMessages(data: MessageUpdateManyMutationInput!, where: MessageWhereInput): BatchPayload!
+  upsertMessage(where: MessageWhereUniqueInput!, create: MessageCreateInput!, update: MessageUpdateInput!): Message!
+  deleteMessage(where: MessageWhereUniqueInput!): Message
+  deleteManyMessages(where: MessageWhereInput): BatchPayload!
+  createNotification(data: NotificationCreateInput!): Notification!
+  updateNotification(data: NotificationUpdateInput!, where: NotificationWhereUniqueInput!): Notification
+  updateManyNotifications(data: NotificationUpdateManyMutationInput!, where: NotificationWhereInput): BatchPayload!
+  upsertNotification(where: NotificationWhereUniqueInput!, create: NotificationCreateInput!, update: NotificationUpdateInput!): Notification!
+  deleteNotification(where: NotificationWhereUniqueInput!): Notification
+  deleteManyNotifications(where: NotificationWhereInput): BatchPayload!
+  createStory(data: StoryCreateInput!): Story!
+  updateStory(data: StoryUpdateInput!, where: StoryWhereUniqueInput!): Story
+  updateManyStories(data: StoryUpdateManyMutationInput!, where: StoryWhereInput): BatchPayload!
+  upsertStory(where: StoryWhereUniqueInput!, create: StoryCreateInput!, update: StoryUpdateInput!): Story!
+  deleteStory(where: StoryWhereUniqueInput!): Story
+  deleteManyStories(where: StoryWhereInput): BatchPayload!
+  createStoryReport(data: StoryReportCreateInput!): StoryReport!
+  updateStoryReport(data: StoryReportUpdateInput!, where: StoryReportWhereUniqueInput!): StoryReport
+  updateManyStoryReports(data: StoryReportUpdateManyMutationInput!, where: StoryReportWhereInput): BatchPayload!
+  upsertStoryReport(where: StoryReportWhereUniqueInput!, create: StoryReportCreateInput!, update: StoryReportUpdateInput!): StoryReport!
+  deleteStoryReport(where: StoryReportWhereUniqueInput!): StoryReport
+  deleteManyStoryReports(where: StoryReportWhereInput): BatchPayload!
+  createUser(data: UserCreateInput!): User!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  createVideo(data: VideoCreateInput!): Video!
+  updateVideo(data: VideoUpdateInput!, where: VideoWhereUniqueInput!): Video
+  updateManyVideos(data: VideoUpdateManyMutationInput!, where: VideoWhereInput): BatchPayload!
+  upsertVideo(where: VideoWhereUniqueInput!, create: VideoCreateInput!, update: VideoUpdateInput!): Video!
+  deleteVideo(where: VideoWhereUniqueInput!): Video
+  deleteManyVideos(where: VideoWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+interface Node {
+  id: ID!
+}
+
+type Notification {
+  id: ID!
+  story: Story!
+  sender: User!
+  receiver: User!
+  body: String!
+}
+
+type NotificationConnection {
+  pageInfo: PageInfo!
+  edges: [NotificationEdge]!
+  aggregate: AggregateNotification!
+}
+
+input NotificationCreateInput {
+  story: StoryCreateOneInput!
+  sender: UserCreateOneInput!
+  receiver: UserCreateOneInput!
+  body: String!
+}
+
+type NotificationEdge {
+  node: Notification!
+  cursor: String!
+}
+
+enum NotificationOrderByInput {
+  id_ASC
+  id_DESC
+  body_ASC
+  body_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type NotificationPreviousValues {
+  id: ID!
+  body: String!
+}
+
+type NotificationSubscriptionPayload {
+  mutation: MutationType!
+  node: Notification
+  updatedFields: [String!]
+  previousValues: NotificationPreviousValues
+}
+
+input NotificationSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: NotificationWhereInput
+  AND: [NotificationSubscriptionWhereInput!]
+  OR: [NotificationSubscriptionWhereInput!]
+  NOT: [NotificationSubscriptionWhereInput!]
+}
+
+input NotificationUpdateInput {
+  story: StoryUpdateOneRequiredInput
+  sender: UserUpdateOneRequiredInput
+  receiver: UserUpdateOneRequiredInput
+  body: String
+}
+
+input NotificationUpdateManyMutationInput {
+  body: String
+}
+
+input NotificationWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  story: StoryWhereInput
+  sender: UserWhereInput
+  receiver: UserWhereInput
+  body: String
+  body_not: String
+  body_in: [String!]
+  body_not_in: [String!]
+  body_lt: String
+  body_lte: String
+  body_gt: String
+  body_gte: String
+  body_contains: String
+  body_not_contains: String
+  body_starts_with: String
+  body_not_starts_with: String
+  body_ends_with: String
+  body_not_ends_with: String
+  AND: [NotificationWhereInput!]
+  OR: [NotificationWhereInput!]
+  NOT: [NotificationWhereInput!]
+}
+
+input NotificationWhereUniqueInput {
+  id: ID
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type Query {
+  comment(where: CommentWhereUniqueInput!): Comment
+  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment]!
+  commentsConnection(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommentConnection!
+  feedback(where: FeedbackWhereUniqueInput!): Feedback
+  feedbacks(where: FeedbackWhereInput, orderBy: FeedbackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Feedback]!
+  feedbacksConnection(where: FeedbackWhereInput, orderBy: FeedbackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FeedbackConnection!
+  hashtag(where: HashtagWhereUniqueInput!): Hashtag
+  hashtags(where: HashtagWhereInput, orderBy: HashtagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Hashtag]!
+  hashtagsConnection(where: HashtagWhereInput, orderBy: HashtagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): HashtagConnection!
+  info(where: InfoWhereUniqueInput!): Info
+  infoes(where: InfoWhereInput, orderBy: InfoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Info]!
+  infoesConnection(where: InfoWhereInput, orderBy: InfoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): InfoConnection!
+  like(where: LikeWhereUniqueInput!): Like
+  likes(where: LikeWhereInput, orderBy: LikeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Like]!
+  likesConnection(where: LikeWhereInput, orderBy: LikeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LikeConnection!
+  message(where: MessageWhereUniqueInput!): Message
+  messages(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Message]!
+  messagesConnection(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MessageConnection!
+  notification(where: NotificationWhereUniqueInput!): Notification
+  notifications(where: NotificationWhereInput, orderBy: NotificationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Notification]!
+  notificationsConnection(where: NotificationWhereInput, orderBy: NotificationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): NotificationConnection!
+  story(where: StoryWhereUniqueInput!): Story
+  stories(where: StoryWhereInput, orderBy: StoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Story]!
+  storiesConnection(where: StoryWhereInput, orderBy: StoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StoryConnection!
+  storyReport(where: StoryReportWhereUniqueInput!): StoryReport
+  storyReports(where: StoryReportWhereInput, orderBy: StoryReportOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StoryReport]!
+  storyReportsConnection(where: StoryReportWhereInput, orderBy: StoryReportOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StoryReportConnection!
+  user(where: UserWhereUniqueInput!): User
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  video(where: VideoWhereUniqueInput!): Video
+  videos(where: VideoWhereInput, orderBy: VideoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Video]!
+  videosConnection(where: VideoWhereInput, orderBy: VideoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): VideoConnection!
+  node(id: ID!): Node
+}
+
+enum Role {
+  ADMIN
+  USER
+  MOD
+}
+
+type Story {
+  id: ID!
+  body: String!
+  postedBy: User!
+  hashtags(where: HashtagWhereInput, orderBy: HashtagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Hashtag!]
+  suspended: Boolean!
+  likes(where: LikeWhereInput, orderBy: LikeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Like!]
+  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
+  reportes(where: StoryReportWhereInput, orderBy: StoryReportOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StoryReport!]
+}
+
+type StoryConnection {
+  pageInfo: PageInfo!
+  edges: [StoryEdge]!
+  aggregate: AggregateStory!
+}
+
+input StoryCreateInput {
+  body: String!
+  postedBy: UserCreateOneWithoutStoriesInput!
+  hashtags: HashtagCreateManyInput
+  suspended: Boolean!
+  likes: LikeCreateManyWithoutStoryInput
+  comments: CommentCreateManyWithoutStoryInput
+  reportes: StoryReportCreateManyWithoutStoryInput
+}
+
+input StoryCreateManyWithoutPostedByInput {
+  create: [StoryCreateWithoutPostedByInput!]
+  connect: [StoryWhereUniqueInput!]
+}
+
+input StoryCreateOneInput {
+  create: StoryCreateInput
+  connect: StoryWhereUniqueInput
+}
+
+input StoryCreateOneWithoutCommentsInput {
+  create: StoryCreateWithoutCommentsInput
+  connect: StoryWhereUniqueInput
+}
+
+input StoryCreateOneWithoutLikesInput {
+  create: StoryCreateWithoutLikesInput
+  connect: StoryWhereUniqueInput
+}
+
+input StoryCreateOneWithoutReportesInput {
+  create: StoryCreateWithoutReportesInput
+  connect: StoryWhereUniqueInput
+}
+
+input StoryCreateWithoutCommentsInput {
+  body: String!
+  postedBy: UserCreateOneWithoutStoriesInput!
+  hashtags: HashtagCreateManyInput
+  suspended: Boolean!
+  likes: LikeCreateManyWithoutStoryInput
+  reportes: StoryReportCreateManyWithoutStoryInput
+}
+
+input StoryCreateWithoutLikesInput {
+  body: String!
+  postedBy: UserCreateOneWithoutStoriesInput!
+  hashtags: HashtagCreateManyInput
+  suspended: Boolean!
+  comments: CommentCreateManyWithoutStoryInput
+  reportes: StoryReportCreateManyWithoutStoryInput
+}
+
+input StoryCreateWithoutPostedByInput {
+  body: String!
+  hashtags: HashtagCreateManyInput
+  suspended: Boolean!
+  likes: LikeCreateManyWithoutStoryInput
+  comments: CommentCreateManyWithoutStoryInput
+  reportes: StoryReportCreateManyWithoutStoryInput
+}
+
+input StoryCreateWithoutReportesInput {
+  body: String!
+  postedBy: UserCreateOneWithoutStoriesInput!
+  hashtags: HashtagCreateManyInput
+  suspended: Boolean!
+  likes: LikeCreateManyWithoutStoryInput
+  comments: CommentCreateManyWithoutStoryInput
+}
+
+type StoryEdge {
+  node: Story!
+  cursor: String!
+}
+
+enum StoryOrderByInput {
+  id_ASC
+  id_DESC
+  body_ASC
+  body_DESC
+  suspended_ASC
+  suspended_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type StoryPreviousValues {
+  id: ID!
+  body: String!
+  suspended: Boolean!
+}
+
+type StoryReport {
+  id: ID!
+  story: Story!
+  reportedBy: User!
+  reason: String!
+}
+
+type StoryReportConnection {
+  pageInfo: PageInfo!
+  edges: [StoryReportEdge]!
+  aggregate: AggregateStoryReport!
+}
+
+input StoryReportCreateInput {
+  story: StoryCreateOneWithoutReportesInput!
+  reportedBy: UserCreateOneInput!
+  reason: String!
+}
+
+input StoryReportCreateManyWithoutStoryInput {
+  create: [StoryReportCreateWithoutStoryInput!]
+  connect: [StoryReportWhereUniqueInput!]
+}
+
+input StoryReportCreateWithoutStoryInput {
+  reportedBy: UserCreateOneInput!
+  reason: String!
+}
+
+type StoryReportEdge {
+  node: StoryReport!
+  cursor: String!
+}
+
+enum StoryReportOrderByInput {
+  id_ASC
+  id_DESC
+  reason_ASC
+  reason_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type StoryReportPreviousValues {
+  id: ID!
+  reason: String!
+}
+
+input StoryReportScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  reason: String
+  reason_not: String
+  reason_in: [String!]
+  reason_not_in: [String!]
+  reason_lt: String
+  reason_lte: String
+  reason_gt: String
+  reason_gte: String
+  reason_contains: String
+  reason_not_contains: String
+  reason_starts_with: String
+  reason_not_starts_with: String
+  reason_ends_with: String
+  reason_not_ends_with: String
+  AND: [StoryReportScalarWhereInput!]
+  OR: [StoryReportScalarWhereInput!]
+  NOT: [StoryReportScalarWhereInput!]
+}
+
+type StoryReportSubscriptionPayload {
+  mutation: MutationType!
+  node: StoryReport
+  updatedFields: [String!]
+  previousValues: StoryReportPreviousValues
+}
+
+input StoryReportSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: StoryReportWhereInput
+  AND: [StoryReportSubscriptionWhereInput!]
+  OR: [StoryReportSubscriptionWhereInput!]
+  NOT: [StoryReportSubscriptionWhereInput!]
+}
+
+input StoryReportUpdateInput {
+  story: StoryUpdateOneRequiredWithoutReportesInput
+  reportedBy: UserUpdateOneRequiredInput
+  reason: String
+}
+
+input StoryReportUpdateManyDataInput {
+  reason: String
+}
+
+input StoryReportUpdateManyMutationInput {
+  reason: String
+}
+
+input StoryReportUpdateManyWithoutStoryInput {
+  create: [StoryReportCreateWithoutStoryInput!]
+  delete: [StoryReportWhereUniqueInput!]
+  connect: [StoryReportWhereUniqueInput!]
+  set: [StoryReportWhereUniqueInput!]
+  disconnect: [StoryReportWhereUniqueInput!]
+  update: [StoryReportUpdateWithWhereUniqueWithoutStoryInput!]
+  upsert: [StoryReportUpsertWithWhereUniqueWithoutStoryInput!]
+  deleteMany: [StoryReportScalarWhereInput!]
+  updateMany: [StoryReportUpdateManyWithWhereNestedInput!]
+}
+
+input StoryReportUpdateManyWithWhereNestedInput {
+  where: StoryReportScalarWhereInput!
+  data: StoryReportUpdateManyDataInput!
+}
+
+input StoryReportUpdateWithoutStoryDataInput {
+  reportedBy: UserUpdateOneRequiredInput
+  reason: String
+}
+
+input StoryReportUpdateWithWhereUniqueWithoutStoryInput {
+  where: StoryReportWhereUniqueInput!
+  data: StoryReportUpdateWithoutStoryDataInput!
+}
+
+input StoryReportUpsertWithWhereUniqueWithoutStoryInput {
+  where: StoryReportWhereUniqueInput!
+  update: StoryReportUpdateWithoutStoryDataInput!
+  create: StoryReportCreateWithoutStoryInput!
+}
+
+input StoryReportWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  story: StoryWhereInput
+  reportedBy: UserWhereInput
+  reason: String
+  reason_not: String
+  reason_in: [String!]
+  reason_not_in: [String!]
+  reason_lt: String
+  reason_lte: String
+  reason_gt: String
+  reason_gte: String
+  reason_contains: String
+  reason_not_contains: String
+  reason_starts_with: String
+  reason_not_starts_with: String
+  reason_ends_with: String
+  reason_not_ends_with: String
+  AND: [StoryReportWhereInput!]
+  OR: [StoryReportWhereInput!]
+  NOT: [StoryReportWhereInput!]
+}
+
+input StoryReportWhereUniqueInput {
+  id: ID
+}
+
+input StoryScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  body: String
+  body_not: String
+  body_in: [String!]
+  body_not_in: [String!]
+  body_lt: String
+  body_lte: String
+  body_gt: String
+  body_gte: String
+  body_contains: String
+  body_not_contains: String
+  body_starts_with: String
+  body_not_starts_with: String
+  body_ends_with: String
+  body_not_ends_with: String
+  suspended: Boolean
+  suspended_not: Boolean
+  AND: [StoryScalarWhereInput!]
+  OR: [StoryScalarWhereInput!]
+  NOT: [StoryScalarWhereInput!]
+}
+
+type StorySubscriptionPayload {
+  mutation: MutationType!
+  node: Story
+  updatedFields: [String!]
+  previousValues: StoryPreviousValues
+}
+
+input StorySubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: StoryWhereInput
+  AND: [StorySubscriptionWhereInput!]
+  OR: [StorySubscriptionWhereInput!]
+  NOT: [StorySubscriptionWhereInput!]
+}
+
+input StoryUpdateDataInput {
+  body: String
+  postedBy: UserUpdateOneRequiredWithoutStoriesInput
+  hashtags: HashtagUpdateManyInput
+  suspended: Boolean
+  likes: LikeUpdateManyWithoutStoryInput
+  comments: CommentUpdateManyWithoutStoryInput
+  reportes: StoryReportUpdateManyWithoutStoryInput
+}
+
+input StoryUpdateInput {
+  body: String
+  postedBy: UserUpdateOneRequiredWithoutStoriesInput
+  hashtags: HashtagUpdateManyInput
+  suspended: Boolean
+  likes: LikeUpdateManyWithoutStoryInput
+  comments: CommentUpdateManyWithoutStoryInput
+  reportes: StoryReportUpdateManyWithoutStoryInput
+}
+
+input StoryUpdateManyDataInput {
+  body: String
+  suspended: Boolean
+}
+
+input StoryUpdateManyMutationInput {
+  body: String
+  suspended: Boolean
+}
+
+input StoryUpdateManyWithoutPostedByInput {
+  create: [StoryCreateWithoutPostedByInput!]
+  delete: [StoryWhereUniqueInput!]
+  connect: [StoryWhereUniqueInput!]
+  set: [StoryWhereUniqueInput!]
+  disconnect: [StoryWhereUniqueInput!]
+  update: [StoryUpdateWithWhereUniqueWithoutPostedByInput!]
+  upsert: [StoryUpsertWithWhereUniqueWithoutPostedByInput!]
+  deleteMany: [StoryScalarWhereInput!]
+  updateMany: [StoryUpdateManyWithWhereNestedInput!]
+}
+
+input StoryUpdateManyWithWhereNestedInput {
+  where: StoryScalarWhereInput!
+  data: StoryUpdateManyDataInput!
+}
+
+input StoryUpdateOneRequiredInput {
+  create: StoryCreateInput
+  update: StoryUpdateDataInput
+  upsert: StoryUpsertNestedInput
+  connect: StoryWhereUniqueInput
+}
+
+input StoryUpdateOneRequiredWithoutCommentsInput {
+  create: StoryCreateWithoutCommentsInput
+  update: StoryUpdateWithoutCommentsDataInput
+  upsert: StoryUpsertWithoutCommentsInput
+  connect: StoryWhereUniqueInput
+}
+
+input StoryUpdateOneRequiredWithoutLikesInput {
+  create: StoryCreateWithoutLikesInput
+  update: StoryUpdateWithoutLikesDataInput
+  upsert: StoryUpsertWithoutLikesInput
+  connect: StoryWhereUniqueInput
+}
+
+input StoryUpdateOneRequiredWithoutReportesInput {
+  create: StoryCreateWithoutReportesInput
+  update: StoryUpdateWithoutReportesDataInput
+  upsert: StoryUpsertWithoutReportesInput
+  connect: StoryWhereUniqueInput
+}
+
+input StoryUpdateWithoutCommentsDataInput {
+  body: String
+  postedBy: UserUpdateOneRequiredWithoutStoriesInput
+  hashtags: HashtagUpdateManyInput
+  suspended: Boolean
+  likes: LikeUpdateManyWithoutStoryInput
+  reportes: StoryReportUpdateManyWithoutStoryInput
+}
+
+input StoryUpdateWithoutLikesDataInput {
+  body: String
+  postedBy: UserUpdateOneRequiredWithoutStoriesInput
+  hashtags: HashtagUpdateManyInput
+  suspended: Boolean
+  comments: CommentUpdateManyWithoutStoryInput
+  reportes: StoryReportUpdateManyWithoutStoryInput
+}
+
+input StoryUpdateWithoutPostedByDataInput {
+  body: String
+  hashtags: HashtagUpdateManyInput
+  suspended: Boolean
+  likes: LikeUpdateManyWithoutStoryInput
+  comments: CommentUpdateManyWithoutStoryInput
+  reportes: StoryReportUpdateManyWithoutStoryInput
+}
+
+input StoryUpdateWithoutReportesDataInput {
+  body: String
+  postedBy: UserUpdateOneRequiredWithoutStoriesInput
+  hashtags: HashtagUpdateManyInput
+  suspended: Boolean
+  likes: LikeUpdateManyWithoutStoryInput
+  comments: CommentUpdateManyWithoutStoryInput
+}
+
+input StoryUpdateWithWhereUniqueWithoutPostedByInput {
+  where: StoryWhereUniqueInput!
+  data: StoryUpdateWithoutPostedByDataInput!
+}
+
+input StoryUpsertNestedInput {
+  update: StoryUpdateDataInput!
+  create: StoryCreateInput!
+}
+
+input StoryUpsertWithoutCommentsInput {
+  update: StoryUpdateWithoutCommentsDataInput!
+  create: StoryCreateWithoutCommentsInput!
+}
+
+input StoryUpsertWithoutLikesInput {
+  update: StoryUpdateWithoutLikesDataInput!
+  create: StoryCreateWithoutLikesInput!
+}
+
+input StoryUpsertWithoutReportesInput {
+  update: StoryUpdateWithoutReportesDataInput!
+  create: StoryCreateWithoutReportesInput!
+}
+
+input StoryUpsertWithWhereUniqueWithoutPostedByInput {
+  where: StoryWhereUniqueInput!
+  update: StoryUpdateWithoutPostedByDataInput!
+  create: StoryCreateWithoutPostedByInput!
+}
+
+input StoryWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  body: String
+  body_not: String
+  body_in: [String!]
+  body_not_in: [String!]
+  body_lt: String
+  body_lte: String
+  body_gt: String
+  body_gte: String
+  body_contains: String
+  body_not_contains: String
+  body_starts_with: String
+  body_not_starts_with: String
+  body_ends_with: String
+  body_not_ends_with: String
+  postedBy: UserWhereInput
+  hashtags_every: HashtagWhereInput
+  hashtags_some: HashtagWhereInput
+  hashtags_none: HashtagWhereInput
+  suspended: Boolean
+  suspended_not: Boolean
+  likes_every: LikeWhereInput
+  likes_some: LikeWhereInput
+  likes_none: LikeWhereInput
+  comments_every: CommentWhereInput
+  comments_some: CommentWhereInput
+  comments_none: CommentWhereInput
+  reportes_every: StoryReportWhereInput
+  reportes_some: StoryReportWhereInput
+  reportes_none: StoryReportWhereInput
+  AND: [StoryWhereInput!]
+  OR: [StoryWhereInput!]
+  NOT: [StoryWhereInput!]
+}
+
+input StoryWhereUniqueInput {
+  id: ID
+}
+
+type Subscription {
+  comment(where: CommentSubscriptionWhereInput): CommentSubscriptionPayload
+  feedback(where: FeedbackSubscriptionWhereInput): FeedbackSubscriptionPayload
+  hashtag(where: HashtagSubscriptionWhereInput): HashtagSubscriptionPayload
+  info(where: InfoSubscriptionWhereInput): InfoSubscriptionPayload
+  like(where: LikeSubscriptionWhereInput): LikeSubscriptionPayload
+  message(where: MessageSubscriptionWhereInput): MessageSubscriptionPayload
+  notification(where: NotificationSubscriptionWhereInput): NotificationSubscriptionPayload
+  story(where: StorySubscriptionWhereInput): StorySubscriptionPayload
+  storyReport(where: StoryReportSubscriptionWhereInput): StoryReportSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  video(where: VideoSubscriptionWhereInput): VideoSubscriptionPayload
+}
+
+type User {
+  id: ID!
+  username: String!
+  password: String!
+  email: String!
+  role: Role!
+  verified: Boolean!
+  banned: Boolean!
+  hashtags(where: HashtagWhereInput, orderBy: HashtagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Hashtag!]
+  stories(where: StoryWhereInput, orderBy: StoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Story!]
+  info(where: InfoWhereInput, orderBy: InfoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Info!]
+}
+
+type UserConnection {
+  pageInfo: PageInfo!
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+input UserCreateInput {
+  username: String!
+  password: String!
+  email: String!
+  role: Role
+  verified: Boolean
+  banned: Boolean
+  hashtags: HashtagCreateManyWithoutModeratorInput
+  stories: StoryCreateManyWithoutPostedByInput
+  info: InfoCreateManyInput
+}
+
+input UserCreateOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutHashtagsInput {
+  create: UserCreateWithoutHashtagsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutStoriesInput {
+  create: UserCreateWithoutStoriesInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutHashtagsInput {
+  username: String!
+  password: String!
+  email: String!
+  role: Role
+  verified: Boolean
+  banned: Boolean
+  stories: StoryCreateManyWithoutPostedByInput
+  info: InfoCreateManyInput
+}
+
+input UserCreateWithoutStoriesInput {
+  username: String!
+  password: String!
+  email: String!
+  role: Role
+  verified: Boolean
+  banned: Boolean
+  hashtags: HashtagCreateManyWithoutModeratorInput
+  info: InfoCreateManyInput
+}
+
+type UserEdge {
+  node: User!
+  cursor: String!
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  username_ASC
+  username_DESC
+  password_ASC
+  password_DESC
+  email_ASC
+  email_DESC
+  role_ASC
+  role_DESC
+  verified_ASC
+  verified_DESC
+  banned_ASC
+  banned_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type UserPreviousValues {
+  id: ID!
+  username: String!
+  password: String!
+  email: String!
+  role: Role!
+  verified: Boolean!
+  banned: Boolean!
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
+}
+
+input UserSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
+  AND: [UserSubscriptionWhereInput!]
+  OR: [UserSubscriptionWhereInput!]
+  NOT: [UserSubscriptionWhereInput!]
+}
+
+input UserUpdateDataInput {
+  username: String
+  password: String
+  email: String
+  role: Role
+  verified: Boolean
+  banned: Boolean
+  hashtags: HashtagUpdateManyWithoutModeratorInput
+  stories: StoryUpdateManyWithoutPostedByInput
+  info: InfoUpdateManyInput
+}
+
+input UserUpdateInput {
+  username: String
+  password: String
+  email: String
+  role: Role
+  verified: Boolean
+  banned: Boolean
+  hashtags: HashtagUpdateManyWithoutModeratorInput
+  stories: StoryUpdateManyWithoutPostedByInput
+  info: InfoUpdateManyInput
+}
+
+input UserUpdateManyMutationInput {
+  username: String
+  password: String
+  email: String
+  role: Role
+  verified: Boolean
+  banned: Boolean
+}
+
+input UserUpdateOneInput {
+  create: UserCreateInput
+  update: UserUpdateDataInput
+  upsert: UserUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateOneRequiredInput {
+  create: UserCreateInput
+  update: UserUpdateDataInput
+  upsert: UserUpsertNestedInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateOneRequiredWithoutHashtagsInput {
+  create: UserCreateWithoutHashtagsInput
+  update: UserUpdateWithoutHashtagsDataInput
+  upsert: UserUpsertWithoutHashtagsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateOneRequiredWithoutStoriesInput {
+  create: UserCreateWithoutStoriesInput
+  update: UserUpdateWithoutStoriesDataInput
+  upsert: UserUpsertWithoutStoriesInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateWithoutHashtagsDataInput {
+  username: String
+  password: String
+  email: String
+  role: Role
+  verified: Boolean
+  banned: Boolean
+  stories: StoryUpdateManyWithoutPostedByInput
+  info: InfoUpdateManyInput
+}
+
+input UserUpdateWithoutStoriesDataInput {
+  username: String
+  password: String
+  email: String
+  role: Role
+  verified: Boolean
+  banned: Boolean
+  hashtags: HashtagUpdateManyWithoutModeratorInput
+  info: InfoUpdateManyInput
+}
+
+input UserUpsertNestedInput {
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
+}
+
+input UserUpsertWithoutHashtagsInput {
+  update: UserUpdateWithoutHashtagsDataInput!
+  create: UserCreateWithoutHashtagsInput!
+}
+
+input UserUpsertWithoutStoriesInput {
+  update: UserUpdateWithoutStoriesDataInput!
+  create: UserCreateWithoutStoriesInput!
+}
+
+input UserWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  username: String
+  username_not: String
+  username_in: [String!]
+  username_not_in: [String!]
+  username_lt: String
+  username_lte: String
+  username_gt: String
+  username_gte: String
+  username_contains: String
+  username_not_contains: String
+  username_starts_with: String
+  username_not_starts_with: String
+  username_ends_with: String
+  username_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  role: Role
+  role_not: Role
+  role_in: [Role!]
+  role_not_in: [Role!]
+  verified: Boolean
+  verified_not: Boolean
+  banned: Boolean
+  banned_not: Boolean
+  hashtags_every: HashtagWhereInput
+  hashtags_some: HashtagWhereInput
+  hashtags_none: HashtagWhereInput
+  stories_every: StoryWhereInput
+  stories_some: StoryWhereInput
+  stories_none: StoryWhereInput
+  info_every: InfoWhereInput
+  info_some: InfoWhereInput
+  info_none: InfoWhereInput
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+}
+
+input UserWhereUniqueInput {
+  id: ID
+  username: String
+  email: String
+}
+
+type Video {
+  id: ID!
+  link: String!
+  sentBy: User!
+}
+
+type VideoConnection {
+  pageInfo: PageInfo!
+  edges: [VideoEdge]!
+  aggregate: AggregateVideo!
+}
+
+input VideoCreateInput {
+  link: String!
+  sentBy: UserCreateOneInput!
+}
+
+type VideoEdge {
+  node: Video!
+  cursor: String!
+}
+
+enum VideoOrderByInput {
+  id_ASC
+  id_DESC
+  link_ASC
+  link_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type VideoPreviousValues {
+  id: ID!
+  link: String!
+}
+
+type VideoSubscriptionPayload {
+  mutation: MutationType!
+  node: Video
+  updatedFields: [String!]
+  previousValues: VideoPreviousValues
+}
+
+input VideoSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: VideoWhereInput
+  AND: [VideoSubscriptionWhereInput!]
+  OR: [VideoSubscriptionWhereInput!]
+  NOT: [VideoSubscriptionWhereInput!]
+}
+
+input VideoUpdateInput {
+  link: String
+  sentBy: UserUpdateOneRequiredInput
+}
+
+input VideoUpdateManyMutationInput {
+  link: String
+}
+
+input VideoWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  link: String
+  link_not: String
+  link_in: [String!]
+  link_not_in: [String!]
+  link_lt: String
+  link_lte: String
+  link_gt: String
+  link_gte: String
+  link_contains: String
+  link_not_contains: String
+  link_starts_with: String
+  link_not_starts_with: String
+  link_ends_with: String
+  link_not_ends_with: String
+  sentBy: UserWhereInput
+  AND: [VideoWhereInput!]
+  OR: [VideoWhereInput!]
+  NOT: [VideoWhereInput!]
+}
+
+input VideoWhereUniqueInput {
+  id: ID
+}

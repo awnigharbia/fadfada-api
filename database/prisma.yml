@@ -1,0 +1,13 @@
+endpoint: https://eu1.prisma.sh/awni-gharbia-ca9484/fadfada-api/dev
+datamodel: datamodel.prisma
+
+generate:
+  - generator: graphql-schema
+    output: ./generated/prisma-client/schema.graphql
+  - generator: javascript-client
+    output: ./generated/prisma-client/
+
+hooks:
+  post-deploy:
+    - graphql get-schema -p prisma
+    - prisma generate

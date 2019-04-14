@@ -1,0 +1,40 @@
+{
+  "name": "fadfada-api",
+  "version": "1.0.0",
+  "description": "Fadfadah API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/awnigharbia/fadfada-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/awnigharbia/fadfada-api/issues"
+  },
+  "homepage": "https://github.com/awnigharbia/fadfada-api#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/node": "^7.0.0",
+    "@babel/plugin-proposal-do-expressions": "^7.2.0",
+    "@babel/plugin-proposal-throw-expressions": "^7.2.0",
+    "@babel/plugin-transform-spread": "^7.2.2",
+    "@babel/preset-env": "^7.4.3",
+    "babel-preset-latest": "^6.24.1",
+    "prettier": "1.16.4"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.4.3",
+    "bcryptjs": "^2.4.3",
+    "graphql-middleware": "^3.0.2",
+    "graphql-yoga": "^1.17.4",
+    "jsonwebtoken": "^8.5.1",
+    "prisma-client-lib": "^1.30.0"
+  }
+}

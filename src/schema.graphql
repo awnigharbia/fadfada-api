@@ -1,0 +1,38 @@
+# import * from "../database/generated/prisma-client/schema.graphql"
+
+type User {
+  id: ID!
+  email: String!
+  username: String!
+  role: String!
+  verified: Boolean!
+  banned: Boolean!
+}
+
+type AuthPayload {
+  token: String!
+  user: User
+}
+
+type Query {
+  messages: [Message!]!
+  users: [User!]!
+  notifications: [Notification!]!
+  hashtags: [Hashtag!]!
+  story: [Story!]!
+  feedback: [Feedback!]!
+  videos: [Video!]!
+  storyReport: [StoryReport!]!
+}
+
+type Mutation {
+  register(
+    username: String!
+    password: String!
+    email: String!
+    role: String!
+    verified: Boolean!
+    banned: Boolean!
+  ): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+}

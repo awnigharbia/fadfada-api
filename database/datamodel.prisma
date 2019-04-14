@@ -1,0 +1,93 @@
+type User {
+  id: ID! @unique
+  username: String! @unique
+  password: String!
+  email: String! @unique
+  role: Role! @default(value: "USER")
+  verified: Boolean! @default(value: "false")
+  banned: Boolean! @default(value: "true")
+  hashtags: [Hashtag!] @relation(name: "Moderator")
+  stories: [Story!]
+  info: [Info!]
+}
+
+enum Role {
+  ADMIN
+  USER
+  MOD
+}
+
+type Hashtag {
+  id: ID! @unique
+  title: String!
+  moderator: User! @relation(name: "Moderator")
+  addedBy: User! @relation(name: "Creator")
+}
+
+type Story {
+  id: ID! @unique
+  body: String!
+  postedBy: User!
+  hashtags: [Hashtag!]!
+  suspended: Boolean!
+  likes: [Like!]!
+  comments: [Comment!]!
+  reportes: [StoryReport!]!
+}
+
+type Feedback {
+  id: ID! @unique
+  title: String!
+  description: String!
+  sentBy: User
+}
+
+type StoryReport {
+  id: ID! @unique
+  story: Story!
+  reportedBy: User!
+  reason: String!
+}
+
+type Message {
+  id: ID! @unique
+  body: String!
+  sentBy: User!
+}
+
+type Video {
+  id: ID! @unique
+  link: String!
+  sentBy: User!
+}
+
+type Notification {
+  id: ID! @unique
+  story: Story!
+  sender: User! @relation(name: "Sender")
+  receiver: User! @relation(name: "Receiver")
+  body: String!
+}
+
+type Comment {
+  id: ID! @unique
+  body: String!
+  story: Story!
+  commentedBy: User!
+}
+
+type Like {
+  id: ID! @unique
+  story: Story!
+  likedBy: User!
+}
+
+type Info {
+  id: ID! @unique
+  browser: String!
+  ip: String!
+  os: String!
+  country: String!
+  language: String!
+  zip: String!
+}
