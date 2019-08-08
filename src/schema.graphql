@@ -7,6 +7,35 @@ type User {
   role: String!
   verified: Boolean!
   banned: Boolean!
+  stories: [Story!]!
+  feedbacks: [Feedback!]!
+  hashtags: [Hashtag!]!
+  language: String!
+}
+
+type Users {
+  users: [User!]!
+  count: Int!
+}
+
+type Stories {
+  stories: [Story!]!
+  count: Int!
+}
+
+type Hashtags {
+  hashtags: [Hashtag!]!
+  count: Int!
+}
+
+type StoryReports {
+  storyReports: [StoryReport!]!
+  count: Int!
+}
+
+type Devices {
+  devices: [Device!]!
+  count: Int!
 }
 
 type AuthPayload {
@@ -14,25 +43,105 @@ type AuthPayload {
   user: User
 }
 
+type ReportStoryResponse {
+  isReported: Boolean!
+}
+
+type UnLikeResponse {
+  isUnliked: Boolean!
+}
+
+type DeleteResponse {
+  isDeleted: Boolean!
+}
+
+type UpdateUserResponse {
+  isUpdated: Boolean!
+}
+
+type NotificationResponse {
+  notification: [Notification!]!
+  count: Int!
+}
+
 type Query {
+  userInfo: User!
   messages: [Message!]!
   users: [User!]!
-  notifications: [Notification!]!
+  notifications(skip: Int!, first: Int!): NotificationResponse!
   hashtags: [Hashtag!]!
-  story: [Story!]!
-  feedback: [Feedback!]!
+  trending: [Hashtag!]!
+  stories: [Story!]!
+  feedbacks: [Feedback!]!
   videos: [Video!]!
-  storyReport: [StoryReport!]!
+  storyReports: [StoryReport!]!
+  story(storyId: String!): Story!
+  user(
+    filter: String!
+    skip: Int
+    first: Int
+    orderBy: UserOrderByInput
+  ): Users!
+  storyWithHashtags(
+    filter: [String]!
+    skip: Int
+    first: Int
+    orderBy: StoryOrderByInput
+  ): Stories!
+
+  storyReport(
+    filter: String!
+    skip: Int
+    first: Int
+    orederBy: StoryReportOrderByInput
+  ): StoryReports!
+  device(
+    filter: String!
+    skip: Int
+    first: Int
+    orederBy: DeviceOrderByInput
+  ): Devices!
 }
 
 type Mutation {
-  register(
-    username: String!
-    password: String!
-    email: String!
-    role: String!
-    verified: Boolean!
-    banned: Boolean!
-  ): AuthPayload
+  register(username: String!, password: String!, email: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
+  sendFeedback(topic: String!, description: String!): Feedback!
+  reportStory(reason: String!, story: String!): ReportStoryResponse!
+  createStory(body: String!, hashtags: [HashtagWhereUniqueInput!]!): Story!
+  createHashtag(title: String!, isModerator: Boolean!): Hashtag!
+  createVideo(link: String!): Video!
+  createMessage(body: String!): Message!
+  updateUser(property: String!, value: String!): UpdateUserResponse!
+  addModerator(moderatorId: String!, hashtagId: String!): Hashtag!
+  setSeenNotifications: BatchPayload!
+  hashtag(
+    filter: String!
+    skip: Int
+    first: Int
+    orderBy: HashtagOrderByInput
+  ): Hashtags!
+  sendNotification(code: String!, storyId: String!): Notification!
+  addComment(body: String!, storyId: String!): Comment!
+  addLike(storyId: String!): Like!
+  unLike(storyId: String!): UnLikeResponse!
+  addDevice(
+    browser: String!
+    ip: String!
+    os: String!
+    country: String!
+    language: String!
+    zip: String!
+  ): Device!
+  followHashtag(hashtagId: String!): User!
+  unFollowHashtag(hashtagId: String!): User!
+  deleteStory(storyId: String!): DeleteResponse
+}
+
+type Subscription {
+  newNotification: Notification!
+  newUser: User!
+  newStoryReport: StoryReport!
+  newFeedback: Feedback!
+  newFollowedStory: Story!
 }

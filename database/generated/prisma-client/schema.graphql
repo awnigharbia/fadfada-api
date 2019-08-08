@@ -2,15 +2,15 @@ type AggregateComment {
   count: Int!
 }
 
+type AggregateDevice {
+  count: Int!
+}
+
 type AggregateFeedback {
   count: Int!
 }
 
 type AggregateHashtag {
-  count: Int!
-}
-
-type AggregateInfo {
   count: Int!
 }
 
@@ -60,6 +60,7 @@ type CommentConnection {
 }
 
 input CommentCreateInput {
+  id: ID
   body: String!
   story: StoryCreateOneWithoutCommentsInput!
   commentedBy: UserCreateOneInput!
@@ -71,6 +72,7 @@ input CommentCreateManyWithoutStoryInput {
 }
 
 input CommentCreateWithoutStoryInput {
+  id: ID
   body: String!
   commentedBy: UserCreateOneInput!
 }
@@ -85,10 +87,6 @@ enum CommentOrderByInput {
   id_DESC
   body_ASC
   body_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
 }
 
 type CommentPreviousValues {
@@ -235,9 +233,380 @@ input CommentWhereUniqueInput {
   id: ID
 }
 
+type Device {
+  id: ID!
+  browser: String!
+  ip: String!
+  os: String!
+  country: String!
+  language: String!
+  zip: String!
+  account: User!
+}
+
+type DeviceConnection {
+  pageInfo: PageInfo!
+  edges: [DeviceEdge]!
+  aggregate: AggregateDevice!
+}
+
+input DeviceCreateInput {
+  id: ID
+  browser: String!
+  ip: String!
+  os: String!
+  country: String!
+  language: String!
+  zip: String!
+  account: UserCreateOneWithoutDeviceInput!
+}
+
+input DeviceCreateManyWithoutAccountInput {
+  create: [DeviceCreateWithoutAccountInput!]
+  connect: [DeviceWhereUniqueInput!]
+}
+
+input DeviceCreateWithoutAccountInput {
+  id: ID
+  browser: String!
+  ip: String!
+  os: String!
+  country: String!
+  language: String!
+  zip: String!
+}
+
+type DeviceEdge {
+  node: Device!
+  cursor: String!
+}
+
+enum DeviceOrderByInput {
+  id_ASC
+  id_DESC
+  browser_ASC
+  browser_DESC
+  ip_ASC
+  ip_DESC
+  os_ASC
+  os_DESC
+  country_ASC
+  country_DESC
+  language_ASC
+  language_DESC
+  zip_ASC
+  zip_DESC
+}
+
+type DevicePreviousValues {
+  id: ID!
+  browser: String!
+  ip: String!
+  os: String!
+  country: String!
+  language: String!
+  zip: String!
+}
+
+input DeviceScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  browser: String
+  browser_not: String
+  browser_in: [String!]
+  browser_not_in: [String!]
+  browser_lt: String
+  browser_lte: String
+  browser_gt: String
+  browser_gte: String
+  browser_contains: String
+  browser_not_contains: String
+  browser_starts_with: String
+  browser_not_starts_with: String
+  browser_ends_with: String
+  browser_not_ends_with: String
+  ip: String
+  ip_not: String
+  ip_in: [String!]
+  ip_not_in: [String!]
+  ip_lt: String
+  ip_lte: String
+  ip_gt: String
+  ip_gte: String
+  ip_contains: String
+  ip_not_contains: String
+  ip_starts_with: String
+  ip_not_starts_with: String
+  ip_ends_with: String
+  ip_not_ends_with: String
+  os: String
+  os_not: String
+  os_in: [String!]
+  os_not_in: [String!]
+  os_lt: String
+  os_lte: String
+  os_gt: String
+  os_gte: String
+  os_contains: String
+  os_not_contains: String
+  os_starts_with: String
+  os_not_starts_with: String
+  os_ends_with: String
+  os_not_ends_with: String
+  country: String
+  country_not: String
+  country_in: [String!]
+  country_not_in: [String!]
+  country_lt: String
+  country_lte: String
+  country_gt: String
+  country_gte: String
+  country_contains: String
+  country_not_contains: String
+  country_starts_with: String
+  country_not_starts_with: String
+  country_ends_with: String
+  country_not_ends_with: String
+  language: String
+  language_not: String
+  language_in: [String!]
+  language_not_in: [String!]
+  language_lt: String
+  language_lte: String
+  language_gt: String
+  language_gte: String
+  language_contains: String
+  language_not_contains: String
+  language_starts_with: String
+  language_not_starts_with: String
+  language_ends_with: String
+  language_not_ends_with: String
+  zip: String
+  zip_not: String
+  zip_in: [String!]
+  zip_not_in: [String!]
+  zip_lt: String
+  zip_lte: String
+  zip_gt: String
+  zip_gte: String
+  zip_contains: String
+  zip_not_contains: String
+  zip_starts_with: String
+  zip_not_starts_with: String
+  zip_ends_with: String
+  zip_not_ends_with: String
+  AND: [DeviceScalarWhereInput!]
+  OR: [DeviceScalarWhereInput!]
+  NOT: [DeviceScalarWhereInput!]
+}
+
+type DeviceSubscriptionPayload {
+  mutation: MutationType!
+  node: Device
+  updatedFields: [String!]
+  previousValues: DevicePreviousValues
+}
+
+input DeviceSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: DeviceWhereInput
+  AND: [DeviceSubscriptionWhereInput!]
+  OR: [DeviceSubscriptionWhereInput!]
+  NOT: [DeviceSubscriptionWhereInput!]
+}
+
+input DeviceUpdateInput {
+  browser: String
+  ip: String
+  os: String
+  country: String
+  language: String
+  zip: String
+  account: UserUpdateOneRequiredWithoutDeviceInput
+}
+
+input DeviceUpdateManyDataInput {
+  browser: String
+  ip: String
+  os: String
+  country: String
+  language: String
+  zip: String
+}
+
+input DeviceUpdateManyMutationInput {
+  browser: String
+  ip: String
+  os: String
+  country: String
+  language: String
+  zip: String
+}
+
+input DeviceUpdateManyWithoutAccountInput {
+  create: [DeviceCreateWithoutAccountInput!]
+  delete: [DeviceWhereUniqueInput!]
+  connect: [DeviceWhereUniqueInput!]
+  set: [DeviceWhereUniqueInput!]
+  disconnect: [DeviceWhereUniqueInput!]
+  update: [DeviceUpdateWithWhereUniqueWithoutAccountInput!]
+  upsert: [DeviceUpsertWithWhereUniqueWithoutAccountInput!]
+  deleteMany: [DeviceScalarWhereInput!]
+  updateMany: [DeviceUpdateManyWithWhereNestedInput!]
+}
+
+input DeviceUpdateManyWithWhereNestedInput {
+  where: DeviceScalarWhereInput!
+  data: DeviceUpdateManyDataInput!
+}
+
+input DeviceUpdateWithoutAccountDataInput {
+  browser: String
+  ip: String
+  os: String
+  country: String
+  language: String
+  zip: String
+}
+
+input DeviceUpdateWithWhereUniqueWithoutAccountInput {
+  where: DeviceWhereUniqueInput!
+  data: DeviceUpdateWithoutAccountDataInput!
+}
+
+input DeviceUpsertWithWhereUniqueWithoutAccountInput {
+  where: DeviceWhereUniqueInput!
+  update: DeviceUpdateWithoutAccountDataInput!
+  create: DeviceCreateWithoutAccountInput!
+}
+
+input DeviceWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  browser: String
+  browser_not: String
+  browser_in: [String!]
+  browser_not_in: [String!]
+  browser_lt: String
+  browser_lte: String
+  browser_gt: String
+  browser_gte: String
+  browser_contains: String
+  browser_not_contains: String
+  browser_starts_with: String
+  browser_not_starts_with: String
+  browser_ends_with: String
+  browser_not_ends_with: String
+  ip: String
+  ip_not: String
+  ip_in: [String!]
+  ip_not_in: [String!]
+  ip_lt: String
+  ip_lte: String
+  ip_gt: String
+  ip_gte: String
+  ip_contains: String
+  ip_not_contains: String
+  ip_starts_with: String
+  ip_not_starts_with: String
+  ip_ends_with: String
+  ip_not_ends_with: String
+  os: String
+  os_not: String
+  os_in: [String!]
+  os_not_in: [String!]
+  os_lt: String
+  os_lte: String
+  os_gt: String
+  os_gte: String
+  os_contains: String
+  os_not_contains: String
+  os_starts_with: String
+  os_not_starts_with: String
+  os_ends_with: String
+  os_not_ends_with: String
+  country: String
+  country_not: String
+  country_in: [String!]
+  country_not_in: [String!]
+  country_lt: String
+  country_lte: String
+  country_gt: String
+  country_gte: String
+  country_contains: String
+  country_not_contains: String
+  country_starts_with: String
+  country_not_starts_with: String
+  country_ends_with: String
+  country_not_ends_with: String
+  language: String
+  language_not: String
+  language_in: [String!]
+  language_not_in: [String!]
+  language_lt: String
+  language_lte: String
+  language_gt: String
+  language_gte: String
+  language_contains: String
+  language_not_contains: String
+  language_starts_with: String
+  language_not_starts_with: String
+  language_ends_with: String
+  language_not_ends_with: String
+  zip: String
+  zip_not: String
+  zip_in: [String!]
+  zip_not_in: [String!]
+  zip_lt: String
+  zip_lte: String
+  zip_gt: String
+  zip_gte: String
+  zip_contains: String
+  zip_not_contains: String
+  zip_starts_with: String
+  zip_not_starts_with: String
+  zip_ends_with: String
+  zip_not_ends_with: String
+  account: UserWhereInput
+  AND: [DeviceWhereInput!]
+  OR: [DeviceWhereInput!]
+  NOT: [DeviceWhereInput!]
+}
+
+input DeviceWhereUniqueInput {
+  id: ID
+}
+
 type Feedback {
   id: ID!
-  title: String!
+  topic: String!
   description: String!
   sentBy: User
 }
@@ -249,9 +618,21 @@ type FeedbackConnection {
 }
 
 input FeedbackCreateInput {
-  title: String!
+  id: ID
+  topic: String!
   description: String!
-  sentBy: UserCreateOneInput
+  sentBy: UserCreateOneWithoutFeedbacksInput
+}
+
+input FeedbackCreateManyWithoutSentByInput {
+  create: [FeedbackCreateWithoutSentByInput!]
+  connect: [FeedbackWhereUniqueInput!]
+}
+
+input FeedbackCreateWithoutSentByInput {
+  id: ID
+  topic: String!
+  description: String!
 }
 
 type FeedbackEdge {
@@ -262,20 +643,64 @@ type FeedbackEdge {
 enum FeedbackOrderByInput {
   id_ASC
   id_DESC
-  title_ASC
-  title_DESC
+  topic_ASC
+  topic_DESC
   description_ASC
   description_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
 }
 
 type FeedbackPreviousValues {
   id: ID!
-  title: String!
+  topic: String!
   description: String!
+}
+
+input FeedbackScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  topic: String
+  topic_not: String
+  topic_in: [String!]
+  topic_not_in: [String!]
+  topic_lt: String
+  topic_lte: String
+  topic_gt: String
+  topic_gte: String
+  topic_contains: String
+  topic_not_contains: String
+  topic_starts_with: String
+  topic_not_starts_with: String
+  topic_ends_with: String
+  topic_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  AND: [FeedbackScalarWhereInput!]
+  OR: [FeedbackScalarWhereInput!]
+  NOT: [FeedbackScalarWhereInput!]
 }
 
 type FeedbackSubscriptionPayload {
@@ -297,14 +722,52 @@ input FeedbackSubscriptionWhereInput {
 }
 
 input FeedbackUpdateInput {
-  title: String
+  topic: String
   description: String
-  sentBy: UserUpdateOneInput
+  sentBy: UserUpdateOneWithoutFeedbacksInput
+}
+
+input FeedbackUpdateManyDataInput {
+  topic: String
+  description: String
 }
 
 input FeedbackUpdateManyMutationInput {
-  title: String
+  topic: String
   description: String
+}
+
+input FeedbackUpdateManyWithoutSentByInput {
+  create: [FeedbackCreateWithoutSentByInput!]
+  delete: [FeedbackWhereUniqueInput!]
+  connect: [FeedbackWhereUniqueInput!]
+  set: [FeedbackWhereUniqueInput!]
+  disconnect: [FeedbackWhereUniqueInput!]
+  update: [FeedbackUpdateWithWhereUniqueWithoutSentByInput!]
+  upsert: [FeedbackUpsertWithWhereUniqueWithoutSentByInput!]
+  deleteMany: [FeedbackScalarWhereInput!]
+  updateMany: [FeedbackUpdateManyWithWhereNestedInput!]
+}
+
+input FeedbackUpdateManyWithWhereNestedInput {
+  where: FeedbackScalarWhereInput!
+  data: FeedbackUpdateManyDataInput!
+}
+
+input FeedbackUpdateWithoutSentByDataInput {
+  topic: String
+  description: String
+}
+
+input FeedbackUpdateWithWhereUniqueWithoutSentByInput {
+  where: FeedbackWhereUniqueInput!
+  data: FeedbackUpdateWithoutSentByDataInput!
+}
+
+input FeedbackUpsertWithWhereUniqueWithoutSentByInput {
+  where: FeedbackWhereUniqueInput!
+  update: FeedbackUpdateWithoutSentByDataInput!
+  create: FeedbackCreateWithoutSentByInput!
 }
 
 input FeedbackWhereInput {
@@ -322,20 +785,20 @@ input FeedbackWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  title: String
-  title_not: String
-  title_in: [String!]
-  title_not_in: [String!]
-  title_lt: String
-  title_lte: String
-  title_gt: String
-  title_gte: String
-  title_contains: String
-  title_not_contains: String
-  title_starts_with: String
-  title_not_starts_with: String
-  title_ends_with: String
-  title_not_ends_with: String
+  topic: String
+  topic_not: String
+  topic_in: [String!]
+  topic_not_in: [String!]
+  topic_lt: String
+  topic_lte: String
+  topic_gt: String
+  topic_gte: String
+  topic_contains: String
+  topic_not_contains: String
+  topic_starts_with: String
+  topic_not_starts_with: String
+  topic_ends_with: String
+  topic_not_ends_with: String
   description: String
   description_not: String
   description_in: [String!]
@@ -363,7 +826,9 @@ input FeedbackWhereUniqueInput {
 type Hashtag {
   id: ID!
   title: String!
-  moderator: User!
+  stories(where: StoryWhereInput, orderBy: StoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Story!]
+  moderator(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  followedBy(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   addedBy: User!
 }
 
@@ -374,24 +839,51 @@ type HashtagConnection {
 }
 
 input HashtagCreateInput {
+  id: ID
   title: String!
-  moderator: UserCreateOneWithoutHashtagsInput!
-  addedBy: UserCreateOneInput!
+  stories: StoryCreateManyWithoutHashtagsInput
+  moderator: UserCreateManyInput
+  followedBy: UserCreateManyWithoutHashtagsInput
+  addedBy: UserCreateOneWithoutCreatedHashtagsInput!
 }
 
-input HashtagCreateManyInput {
-  create: [HashtagCreateInput!]
+input HashtagCreateManyWithoutAddedByInput {
+  create: [HashtagCreateWithoutAddedByInput!]
   connect: [HashtagWhereUniqueInput!]
 }
 
-input HashtagCreateManyWithoutModeratorInput {
-  create: [HashtagCreateWithoutModeratorInput!]
+input HashtagCreateManyWithoutFollowedByInput {
+  create: [HashtagCreateWithoutFollowedByInput!]
   connect: [HashtagWhereUniqueInput!]
 }
 
-input HashtagCreateWithoutModeratorInput {
+input HashtagCreateManyWithoutStoriesInput {
+  create: [HashtagCreateWithoutStoriesInput!]
+  connect: [HashtagWhereUniqueInput!]
+}
+
+input HashtagCreateWithoutAddedByInput {
+  id: ID
   title: String!
-  addedBy: UserCreateOneInput!
+  stories: StoryCreateManyWithoutHashtagsInput
+  moderator: UserCreateManyInput
+  followedBy: UserCreateManyWithoutHashtagsInput
+}
+
+input HashtagCreateWithoutFollowedByInput {
+  id: ID
+  title: String!
+  stories: StoryCreateManyWithoutHashtagsInput
+  moderator: UserCreateManyInput
+  addedBy: UserCreateOneWithoutCreatedHashtagsInput!
+}
+
+input HashtagCreateWithoutStoriesInput {
+  id: ID
+  title: String!
+  moderator: UserCreateManyInput
+  followedBy: UserCreateManyWithoutHashtagsInput
+  addedBy: UserCreateOneWithoutCreatedHashtagsInput!
 }
 
 type HashtagEdge {
@@ -404,10 +896,6 @@ enum HashtagOrderByInput {
   id_DESC
   title_ASC
   title_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
 }
 
 type HashtagPreviousValues {
@@ -467,46 +955,54 @@ input HashtagSubscriptionWhereInput {
   NOT: [HashtagSubscriptionWhereInput!]
 }
 
-input HashtagUpdateDataInput {
-  title: String
-  moderator: UserUpdateOneRequiredWithoutHashtagsInput
-  addedBy: UserUpdateOneRequiredInput
-}
-
 input HashtagUpdateInput {
   title: String
-  moderator: UserUpdateOneRequiredWithoutHashtagsInput
-  addedBy: UserUpdateOneRequiredInput
+  stories: StoryUpdateManyWithoutHashtagsInput
+  moderator: UserUpdateManyInput
+  followedBy: UserUpdateManyWithoutHashtagsInput
+  addedBy: UserUpdateOneRequiredWithoutCreatedHashtagsInput
 }
 
 input HashtagUpdateManyDataInput {
   title: String
 }
 
-input HashtagUpdateManyInput {
-  create: [HashtagCreateInput!]
-  update: [HashtagUpdateWithWhereUniqueNestedInput!]
-  upsert: [HashtagUpsertWithWhereUniqueNestedInput!]
-  delete: [HashtagWhereUniqueInput!]
-  connect: [HashtagWhereUniqueInput!]
-  set: [HashtagWhereUniqueInput!]
-  disconnect: [HashtagWhereUniqueInput!]
-  deleteMany: [HashtagScalarWhereInput!]
-  updateMany: [HashtagUpdateManyWithWhereNestedInput!]
-}
-
 input HashtagUpdateManyMutationInput {
   title: String
 }
 
-input HashtagUpdateManyWithoutModeratorInput {
-  create: [HashtagCreateWithoutModeratorInput!]
+input HashtagUpdateManyWithoutAddedByInput {
+  create: [HashtagCreateWithoutAddedByInput!]
   delete: [HashtagWhereUniqueInput!]
   connect: [HashtagWhereUniqueInput!]
   set: [HashtagWhereUniqueInput!]
   disconnect: [HashtagWhereUniqueInput!]
-  update: [HashtagUpdateWithWhereUniqueWithoutModeratorInput!]
-  upsert: [HashtagUpsertWithWhereUniqueWithoutModeratorInput!]
+  update: [HashtagUpdateWithWhereUniqueWithoutAddedByInput!]
+  upsert: [HashtagUpsertWithWhereUniqueWithoutAddedByInput!]
+  deleteMany: [HashtagScalarWhereInput!]
+  updateMany: [HashtagUpdateManyWithWhereNestedInput!]
+}
+
+input HashtagUpdateManyWithoutFollowedByInput {
+  create: [HashtagCreateWithoutFollowedByInput!]
+  delete: [HashtagWhereUniqueInput!]
+  connect: [HashtagWhereUniqueInput!]
+  set: [HashtagWhereUniqueInput!]
+  disconnect: [HashtagWhereUniqueInput!]
+  update: [HashtagUpdateWithWhereUniqueWithoutFollowedByInput!]
+  upsert: [HashtagUpsertWithWhereUniqueWithoutFollowedByInput!]
+  deleteMany: [HashtagScalarWhereInput!]
+  updateMany: [HashtagUpdateManyWithWhereNestedInput!]
+}
+
+input HashtagUpdateManyWithoutStoriesInput {
+  create: [HashtagCreateWithoutStoriesInput!]
+  delete: [HashtagWhereUniqueInput!]
+  connect: [HashtagWhereUniqueInput!]
+  set: [HashtagWhereUniqueInput!]
+  disconnect: [HashtagWhereUniqueInput!]
+  update: [HashtagUpdateWithWhereUniqueWithoutStoriesInput!]
+  upsert: [HashtagUpsertWithWhereUniqueWithoutStoriesInput!]
   deleteMany: [HashtagScalarWhereInput!]
   updateMany: [HashtagUpdateManyWithWhereNestedInput!]
 }
@@ -516,31 +1012,58 @@ input HashtagUpdateManyWithWhereNestedInput {
   data: HashtagUpdateManyDataInput!
 }
 
-input HashtagUpdateWithoutModeratorDataInput {
+input HashtagUpdateWithoutAddedByDataInput {
   title: String
-  addedBy: UserUpdateOneRequiredInput
+  stories: StoryUpdateManyWithoutHashtagsInput
+  moderator: UserUpdateManyInput
+  followedBy: UserUpdateManyWithoutHashtagsInput
 }
 
-input HashtagUpdateWithWhereUniqueNestedInput {
-  where: HashtagWhereUniqueInput!
-  data: HashtagUpdateDataInput!
+input HashtagUpdateWithoutFollowedByDataInput {
+  title: String
+  stories: StoryUpdateManyWithoutHashtagsInput
+  moderator: UserUpdateManyInput
+  addedBy: UserUpdateOneRequiredWithoutCreatedHashtagsInput
 }
 
-input HashtagUpdateWithWhereUniqueWithoutModeratorInput {
-  where: HashtagWhereUniqueInput!
-  data: HashtagUpdateWithoutModeratorDataInput!
+input HashtagUpdateWithoutStoriesDataInput {
+  title: String
+  moderator: UserUpdateManyInput
+  followedBy: UserUpdateManyWithoutHashtagsInput
+  addedBy: UserUpdateOneRequiredWithoutCreatedHashtagsInput
 }
 
-input HashtagUpsertWithWhereUniqueNestedInput {
+input HashtagUpdateWithWhereUniqueWithoutAddedByInput {
   where: HashtagWhereUniqueInput!
-  update: HashtagUpdateDataInput!
-  create: HashtagCreateInput!
+  data: HashtagUpdateWithoutAddedByDataInput!
 }
 
-input HashtagUpsertWithWhereUniqueWithoutModeratorInput {
+input HashtagUpdateWithWhereUniqueWithoutFollowedByInput {
   where: HashtagWhereUniqueInput!
-  update: HashtagUpdateWithoutModeratorDataInput!
-  create: HashtagCreateWithoutModeratorInput!
+  data: HashtagUpdateWithoutFollowedByDataInput!
+}
+
+input HashtagUpdateWithWhereUniqueWithoutStoriesInput {
+  where: HashtagWhereUniqueInput!
+  data: HashtagUpdateWithoutStoriesDataInput!
+}
+
+input HashtagUpsertWithWhereUniqueWithoutAddedByInput {
+  where: HashtagWhereUniqueInput!
+  update: HashtagUpdateWithoutAddedByDataInput!
+  create: HashtagCreateWithoutAddedByInput!
+}
+
+input HashtagUpsertWithWhereUniqueWithoutFollowedByInput {
+  where: HashtagWhereUniqueInput!
+  update: HashtagUpdateWithoutFollowedByDataInput!
+  create: HashtagCreateWithoutFollowedByInput!
+}
+
+input HashtagUpsertWithWhereUniqueWithoutStoriesInput {
+  where: HashtagWhereUniqueInput!
+  update: HashtagUpdateWithoutStoriesDataInput!
+  create: HashtagCreateWithoutStoriesInput!
 }
 
 input HashtagWhereInput {
@@ -572,7 +1095,15 @@ input HashtagWhereInput {
   title_not_starts_with: String
   title_ends_with: String
   title_not_ends_with: String
-  moderator: UserWhereInput
+  stories_every: StoryWhereInput
+  stories_some: StoryWhereInput
+  stories_none: StoryWhereInput
+  moderator_every: UserWhereInput
+  moderator_some: UserWhereInput
+  moderator_none: UserWhereInput
+  followedBy_every: UserWhereInput
+  followedBy_some: UserWhereInput
+  followedBy_none: UserWhereInput
   addedBy: UserWhereInput
   AND: [HashtagWhereInput!]
   OR: [HashtagWhereInput!]
@@ -581,366 +1112,7 @@ input HashtagWhereInput {
 
 input HashtagWhereUniqueInput {
   id: ID
-}
-
-type Info {
-  id: ID!
-  browser: String!
-  ip: String!
-  os: String!
-  country: String!
-  language: String!
-  zip: String!
-}
-
-type InfoConnection {
-  pageInfo: PageInfo!
-  edges: [InfoEdge]!
-  aggregate: AggregateInfo!
-}
-
-input InfoCreateInput {
-  browser: String!
-  ip: String!
-  os: String!
-  country: String!
-  language: String!
-  zip: String!
-}
-
-input InfoCreateManyInput {
-  create: [InfoCreateInput!]
-  connect: [InfoWhereUniqueInput!]
-}
-
-type InfoEdge {
-  node: Info!
-  cursor: String!
-}
-
-enum InfoOrderByInput {
-  id_ASC
-  id_DESC
-  browser_ASC
-  browser_DESC
-  ip_ASC
-  ip_DESC
-  os_ASC
-  os_DESC
-  country_ASC
-  country_DESC
-  language_ASC
-  language_DESC
-  zip_ASC
-  zip_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-}
-
-type InfoPreviousValues {
-  id: ID!
-  browser: String!
-  ip: String!
-  os: String!
-  country: String!
-  language: String!
-  zip: String!
-}
-
-input InfoScalarWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  browser: String
-  browser_not: String
-  browser_in: [String!]
-  browser_not_in: [String!]
-  browser_lt: String
-  browser_lte: String
-  browser_gt: String
-  browser_gte: String
-  browser_contains: String
-  browser_not_contains: String
-  browser_starts_with: String
-  browser_not_starts_with: String
-  browser_ends_with: String
-  browser_not_ends_with: String
-  ip: String
-  ip_not: String
-  ip_in: [String!]
-  ip_not_in: [String!]
-  ip_lt: String
-  ip_lte: String
-  ip_gt: String
-  ip_gte: String
-  ip_contains: String
-  ip_not_contains: String
-  ip_starts_with: String
-  ip_not_starts_with: String
-  ip_ends_with: String
-  ip_not_ends_with: String
-  os: String
-  os_not: String
-  os_in: [String!]
-  os_not_in: [String!]
-  os_lt: String
-  os_lte: String
-  os_gt: String
-  os_gte: String
-  os_contains: String
-  os_not_contains: String
-  os_starts_with: String
-  os_not_starts_with: String
-  os_ends_with: String
-  os_not_ends_with: String
-  country: String
-  country_not: String
-  country_in: [String!]
-  country_not_in: [String!]
-  country_lt: String
-  country_lte: String
-  country_gt: String
-  country_gte: String
-  country_contains: String
-  country_not_contains: String
-  country_starts_with: String
-  country_not_starts_with: String
-  country_ends_with: String
-  country_not_ends_with: String
-  language: String
-  language_not: String
-  language_in: [String!]
-  language_not_in: [String!]
-  language_lt: String
-  language_lte: String
-  language_gt: String
-  language_gte: String
-  language_contains: String
-  language_not_contains: String
-  language_starts_with: String
-  language_not_starts_with: String
-  language_ends_with: String
-  language_not_ends_with: String
-  zip: String
-  zip_not: String
-  zip_in: [String!]
-  zip_not_in: [String!]
-  zip_lt: String
-  zip_lte: String
-  zip_gt: String
-  zip_gte: String
-  zip_contains: String
-  zip_not_contains: String
-  zip_starts_with: String
-  zip_not_starts_with: String
-  zip_ends_with: String
-  zip_not_ends_with: String
-  AND: [InfoScalarWhereInput!]
-  OR: [InfoScalarWhereInput!]
-  NOT: [InfoScalarWhereInput!]
-}
-
-type InfoSubscriptionPayload {
-  mutation: MutationType!
-  node: Info
-  updatedFields: [String!]
-  previousValues: InfoPreviousValues
-}
-
-input InfoSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: InfoWhereInput
-  AND: [InfoSubscriptionWhereInput!]
-  OR: [InfoSubscriptionWhereInput!]
-  NOT: [InfoSubscriptionWhereInput!]
-}
-
-input InfoUpdateDataInput {
-  browser: String
-  ip: String
-  os: String
-  country: String
-  language: String
-  zip: String
-}
-
-input InfoUpdateInput {
-  browser: String
-  ip: String
-  os: String
-  country: String
-  language: String
-  zip: String
-}
-
-input InfoUpdateManyDataInput {
-  browser: String
-  ip: String
-  os: String
-  country: String
-  language: String
-  zip: String
-}
-
-input InfoUpdateManyInput {
-  create: [InfoCreateInput!]
-  update: [InfoUpdateWithWhereUniqueNestedInput!]
-  upsert: [InfoUpsertWithWhereUniqueNestedInput!]
-  delete: [InfoWhereUniqueInput!]
-  connect: [InfoWhereUniqueInput!]
-  set: [InfoWhereUniqueInput!]
-  disconnect: [InfoWhereUniqueInput!]
-  deleteMany: [InfoScalarWhereInput!]
-  updateMany: [InfoUpdateManyWithWhereNestedInput!]
-}
-
-input InfoUpdateManyMutationInput {
-  browser: String
-  ip: String
-  os: String
-  country: String
-  language: String
-  zip: String
-}
-
-input InfoUpdateManyWithWhereNestedInput {
-  where: InfoScalarWhereInput!
-  data: InfoUpdateManyDataInput!
-}
-
-input InfoUpdateWithWhereUniqueNestedInput {
-  where: InfoWhereUniqueInput!
-  data: InfoUpdateDataInput!
-}
-
-input InfoUpsertWithWhereUniqueNestedInput {
-  where: InfoWhereUniqueInput!
-  update: InfoUpdateDataInput!
-  create: InfoCreateInput!
-}
-
-input InfoWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  browser: String
-  browser_not: String
-  browser_in: [String!]
-  browser_not_in: [String!]
-  browser_lt: String
-  browser_lte: String
-  browser_gt: String
-  browser_gte: String
-  browser_contains: String
-  browser_not_contains: String
-  browser_starts_with: String
-  browser_not_starts_with: String
-  browser_ends_with: String
-  browser_not_ends_with: String
-  ip: String
-  ip_not: String
-  ip_in: [String!]
-  ip_not_in: [String!]
-  ip_lt: String
-  ip_lte: String
-  ip_gt: String
-  ip_gte: String
-  ip_contains: String
-  ip_not_contains: String
-  ip_starts_with: String
-  ip_not_starts_with: String
-  ip_ends_with: String
-  ip_not_ends_with: String
-  os: String
-  os_not: String
-  os_in: [String!]
-  os_not_in: [String!]
-  os_lt: String
-  os_lte: String
-  os_gt: String
-  os_gte: String
-  os_contains: String
-  os_not_contains: String
-  os_starts_with: String
-  os_not_starts_with: String
-  os_ends_with: String
-  os_not_ends_with: String
-  country: String
-  country_not: String
-  country_in: [String!]
-  country_not_in: [String!]
-  country_lt: String
-  country_lte: String
-  country_gt: String
-  country_gte: String
-  country_contains: String
-  country_not_contains: String
-  country_starts_with: String
-  country_not_starts_with: String
-  country_ends_with: String
-  country_not_ends_with: String
-  language: String
-  language_not: String
-  language_in: [String!]
-  language_not_in: [String!]
-  language_lt: String
-  language_lte: String
-  language_gt: String
-  language_gte: String
-  language_contains: String
-  language_not_contains: String
-  language_starts_with: String
-  language_not_starts_with: String
-  language_ends_with: String
-  language_not_ends_with: String
-  zip: String
-  zip_not: String
-  zip_in: [String!]
-  zip_not_in: [String!]
-  zip_lt: String
-  zip_lte: String
-  zip_gt: String
-  zip_gte: String
-  zip_contains: String
-  zip_not_contains: String
-  zip_starts_with: String
-  zip_not_starts_with: String
-  zip_ends_with: String
-  zip_not_ends_with: String
-  AND: [InfoWhereInput!]
-  OR: [InfoWhereInput!]
-  NOT: [InfoWhereInput!]
-}
-
-input InfoWhereUniqueInput {
-  id: ID
+  title: String
 }
 
 type Like {
@@ -956,6 +1128,7 @@ type LikeConnection {
 }
 
 input LikeCreateInput {
+  id: ID
   story: StoryCreateOneWithoutLikesInput!
   likedBy: UserCreateOneInput!
 }
@@ -966,6 +1139,7 @@ input LikeCreateManyWithoutStoryInput {
 }
 
 input LikeCreateWithoutStoryInput {
+  id: ID
   likedBy: UserCreateOneInput!
 }
 
@@ -977,10 +1151,6 @@ type LikeEdge {
 enum LikeOrderByInput {
   id_ASC
   id_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
 }
 
 type LikePreviousValues {
@@ -1097,6 +1267,7 @@ type MessageConnection {
 }
 
 input MessageCreateInput {
+  id: ID
   body: String!
   sentBy: UserCreateOneInput!
 }
@@ -1111,10 +1282,6 @@ enum MessageOrderByInput {
   id_DESC
   body_ASC
   body_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
 }
 
 type MessagePreviousValues {
@@ -1195,6 +1362,12 @@ type Mutation {
   upsertComment(where: CommentWhereUniqueInput!, create: CommentCreateInput!, update: CommentUpdateInput!): Comment!
   deleteComment(where: CommentWhereUniqueInput!): Comment
   deleteManyComments(where: CommentWhereInput): BatchPayload!
+  createDevice(data: DeviceCreateInput!): Device!
+  updateDevice(data: DeviceUpdateInput!, where: DeviceWhereUniqueInput!): Device
+  updateManyDevices(data: DeviceUpdateManyMutationInput!, where: DeviceWhereInput): BatchPayload!
+  upsertDevice(where: DeviceWhereUniqueInput!, create: DeviceCreateInput!, update: DeviceUpdateInput!): Device!
+  deleteDevice(where: DeviceWhereUniqueInput!): Device
+  deleteManyDevices(where: DeviceWhereInput): BatchPayload!
   createFeedback(data: FeedbackCreateInput!): Feedback!
   updateFeedback(data: FeedbackUpdateInput!, where: FeedbackWhereUniqueInput!): Feedback
   updateManyFeedbacks(data: FeedbackUpdateManyMutationInput!, where: FeedbackWhereInput): BatchPayload!
@@ -1207,12 +1380,6 @@ type Mutation {
   upsertHashtag(where: HashtagWhereUniqueInput!, create: HashtagCreateInput!, update: HashtagUpdateInput!): Hashtag!
   deleteHashtag(where: HashtagWhereUniqueInput!): Hashtag
   deleteManyHashtags(where: HashtagWhereInput): BatchPayload!
-  createInfo(data: InfoCreateInput!): Info!
-  updateInfo(data: InfoUpdateInput!, where: InfoWhereUniqueInput!): Info
-  updateManyInfoes(data: InfoUpdateManyMutationInput!, where: InfoWhereInput): BatchPayload!
-  upsertInfo(where: InfoWhereUniqueInput!, create: InfoCreateInput!, update: InfoUpdateInput!): Info!
-  deleteInfo(where: InfoWhereUniqueInput!): Info
-  deleteManyInfoes(where: InfoWhereInput): BatchPayload!
   createLike(data: LikeCreateInput!): Like!
   updateLike(data: LikeUpdateInput!, where: LikeWhereUniqueInput!): Like
   upsertLike(where: LikeWhereUniqueInput!, create: LikeCreateInput!, update: LikeUpdateInput!): Like!
@@ -1270,8 +1437,8 @@ type Notification {
   id: ID!
   story: Story!
   sender: User!
-  receiver: User!
-  body: String!
+  code: String!
+  seen: Boolean!
 }
 
 type NotificationConnection {
@@ -1281,10 +1448,23 @@ type NotificationConnection {
 }
 
 input NotificationCreateInput {
-  story: StoryCreateOneInput!
+  id: ID
+  story: StoryCreateOneWithoutNotificationsInput!
   sender: UserCreateOneInput!
-  receiver: UserCreateOneInput!
-  body: String!
+  code: String!
+  seen: Boolean
+}
+
+input NotificationCreateManyWithoutStoryInput {
+  create: [NotificationCreateWithoutStoryInput!]
+  connect: [NotificationWhereUniqueInput!]
+}
+
+input NotificationCreateWithoutStoryInput {
+  id: ID
+  sender: UserCreateOneInput!
+  code: String!
+  seen: Boolean
 }
 
 type NotificationEdge {
@@ -1295,17 +1475,52 @@ type NotificationEdge {
 enum NotificationOrderByInput {
   id_ASC
   id_DESC
-  body_ASC
-  body_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
+  code_ASC
+  code_DESC
+  seen_ASC
+  seen_DESC
 }
 
 type NotificationPreviousValues {
   id: ID!
-  body: String!
+  code: String!
+  seen: Boolean!
+}
+
+input NotificationScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  code: String
+  code_not: String
+  code_in: [String!]
+  code_not_in: [String!]
+  code_lt: String
+  code_lte: String
+  code_gt: String
+  code_gte: String
+  code_contains: String
+  code_not_contains: String
+  code_starts_with: String
+  code_not_starts_with: String
+  code_ends_with: String
+  code_not_ends_with: String
+  seen: Boolean
+  seen_not: Boolean
+  AND: [NotificationScalarWhereInput!]
+  OR: [NotificationScalarWhereInput!]
+  NOT: [NotificationScalarWhereInput!]
 }
 
 type NotificationSubscriptionPayload {
@@ -1327,14 +1542,54 @@ input NotificationSubscriptionWhereInput {
 }
 
 input NotificationUpdateInput {
-  story: StoryUpdateOneRequiredInput
+  story: StoryUpdateOneRequiredWithoutNotificationsInput
   sender: UserUpdateOneRequiredInput
-  receiver: UserUpdateOneRequiredInput
-  body: String
+  code: String
+  seen: Boolean
+}
+
+input NotificationUpdateManyDataInput {
+  code: String
+  seen: Boolean
 }
 
 input NotificationUpdateManyMutationInput {
-  body: String
+  code: String
+  seen: Boolean
+}
+
+input NotificationUpdateManyWithoutStoryInput {
+  create: [NotificationCreateWithoutStoryInput!]
+  delete: [NotificationWhereUniqueInput!]
+  connect: [NotificationWhereUniqueInput!]
+  set: [NotificationWhereUniqueInput!]
+  disconnect: [NotificationWhereUniqueInput!]
+  update: [NotificationUpdateWithWhereUniqueWithoutStoryInput!]
+  upsert: [NotificationUpsertWithWhereUniqueWithoutStoryInput!]
+  deleteMany: [NotificationScalarWhereInput!]
+  updateMany: [NotificationUpdateManyWithWhereNestedInput!]
+}
+
+input NotificationUpdateManyWithWhereNestedInput {
+  where: NotificationScalarWhereInput!
+  data: NotificationUpdateManyDataInput!
+}
+
+input NotificationUpdateWithoutStoryDataInput {
+  sender: UserUpdateOneRequiredInput
+  code: String
+  seen: Boolean
+}
+
+input NotificationUpdateWithWhereUniqueWithoutStoryInput {
+  where: NotificationWhereUniqueInput!
+  data: NotificationUpdateWithoutStoryDataInput!
+}
+
+input NotificationUpsertWithWhereUniqueWithoutStoryInput {
+  where: NotificationWhereUniqueInput!
+  update: NotificationUpdateWithoutStoryDataInput!
+  create: NotificationCreateWithoutStoryInput!
 }
 
 input NotificationWhereInput {
@@ -1354,21 +1609,22 @@ input NotificationWhereInput {
   id_not_ends_with: ID
   story: StoryWhereInput
   sender: UserWhereInput
-  receiver: UserWhereInput
-  body: String
-  body_not: String
-  body_in: [String!]
-  body_not_in: [String!]
-  body_lt: String
-  body_lte: String
-  body_gt: String
-  body_gte: String
-  body_contains: String
-  body_not_contains: String
-  body_starts_with: String
-  body_not_starts_with: String
-  body_ends_with: String
-  body_not_ends_with: String
+  code: String
+  code_not: String
+  code_in: [String!]
+  code_not_in: [String!]
+  code_lt: String
+  code_lte: String
+  code_gt: String
+  code_gte: String
+  code_contains: String
+  code_not_contains: String
+  code_starts_with: String
+  code_not_starts_with: String
+  code_ends_with: String
+  code_not_ends_with: String
+  seen: Boolean
+  seen_not: Boolean
   AND: [NotificationWhereInput!]
   OR: [NotificationWhereInput!]
   NOT: [NotificationWhereInput!]
@@ -1389,15 +1645,15 @@ type Query {
   comment(where: CommentWhereUniqueInput!): Comment
   comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment]!
   commentsConnection(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommentConnection!
+  device(where: DeviceWhereUniqueInput!): Device
+  devices(where: DeviceWhereInput, orderBy: DeviceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Device]!
+  devicesConnection(where: DeviceWhereInput, orderBy: DeviceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DeviceConnection!
   feedback(where: FeedbackWhereUniqueInput!): Feedback
   feedbacks(where: FeedbackWhereInput, orderBy: FeedbackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Feedback]!
   feedbacksConnection(where: FeedbackWhereInput, orderBy: FeedbackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FeedbackConnection!
   hashtag(where: HashtagWhereUniqueInput!): Hashtag
   hashtags(where: HashtagWhereInput, orderBy: HashtagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Hashtag]!
   hashtagsConnection(where: HashtagWhereInput, orderBy: HashtagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): HashtagConnection!
-  info(where: InfoWhereUniqueInput!): Info
-  infoes(where: InfoWhereInput, orderBy: InfoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Info]!
-  infoesConnection(where: InfoWhereInput, orderBy: InfoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): InfoConnection!
   like(where: LikeWhereUniqueInput!): Like
   likes(where: LikeWhereInput, orderBy: LikeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Like]!
   likesConnection(where: LikeWhereInput, orderBy: LikeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LikeConnection!
@@ -1422,12 +1678,6 @@ type Query {
   node(id: ID!): Node
 }
 
-enum Role {
-  ADMIN
-  USER
-  MOD
-}
-
 type Story {
   id: ID!
   body: String!
@@ -1436,7 +1686,8 @@ type Story {
   suspended: Boolean!
   likes(where: LikeWhereInput, orderBy: LikeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Like!]
   comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
-  reportes(where: StoryReportWhereInput, orderBy: StoryReportOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StoryReport!]
+  reports(where: StoryReportWhereInput, orderBy: StoryReportOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StoryReport!]
+  notifications(where: NotificationWhereInput, orderBy: NotificationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Notification!]
 }
 
 type StoryConnection {
@@ -1446,23 +1697,25 @@ type StoryConnection {
 }
 
 input StoryCreateInput {
+  id: ID
   body: String!
   postedBy: UserCreateOneWithoutStoriesInput!
-  hashtags: HashtagCreateManyInput
-  suspended: Boolean!
+  hashtags: HashtagCreateManyWithoutStoriesInput
+  suspended: Boolean
   likes: LikeCreateManyWithoutStoryInput
   comments: CommentCreateManyWithoutStoryInput
-  reportes: StoryReportCreateManyWithoutStoryInput
+  reports: StoryReportCreateManyWithoutStoryInput
+  notifications: NotificationCreateManyWithoutStoryInput
+}
+
+input StoryCreateManyWithoutHashtagsInput {
+  create: [StoryCreateWithoutHashtagsInput!]
+  connect: [StoryWhereUniqueInput!]
 }
 
 input StoryCreateManyWithoutPostedByInput {
   create: [StoryCreateWithoutPostedByInput!]
   connect: [StoryWhereUniqueInput!]
-}
-
-input StoryCreateOneInput {
-  create: StoryCreateInput
-  connect: StoryWhereUniqueInput
 }
 
 input StoryCreateOneWithoutCommentsInput {
@@ -1475,45 +1728,80 @@ input StoryCreateOneWithoutLikesInput {
   connect: StoryWhereUniqueInput
 }
 
-input StoryCreateOneWithoutReportesInput {
-  create: StoryCreateWithoutReportesInput
+input StoryCreateOneWithoutNotificationsInput {
+  create: StoryCreateWithoutNotificationsInput
+  connect: StoryWhereUniqueInput
+}
+
+input StoryCreateOneWithoutReportsInput {
+  create: StoryCreateWithoutReportsInput
   connect: StoryWhereUniqueInput
 }
 
 input StoryCreateWithoutCommentsInput {
+  id: ID
   body: String!
   postedBy: UserCreateOneWithoutStoriesInput!
-  hashtags: HashtagCreateManyInput
-  suspended: Boolean!
+  hashtags: HashtagCreateManyWithoutStoriesInput
+  suspended: Boolean
   likes: LikeCreateManyWithoutStoryInput
-  reportes: StoryReportCreateManyWithoutStoryInput
+  reports: StoryReportCreateManyWithoutStoryInput
+  notifications: NotificationCreateManyWithoutStoryInput
+}
+
+input StoryCreateWithoutHashtagsInput {
+  id: ID
+  body: String!
+  postedBy: UserCreateOneWithoutStoriesInput!
+  suspended: Boolean
+  likes: LikeCreateManyWithoutStoryInput
+  comments: CommentCreateManyWithoutStoryInput
+  reports: StoryReportCreateManyWithoutStoryInput
+  notifications: NotificationCreateManyWithoutStoryInput
 }
 
 input StoryCreateWithoutLikesInput {
+  id: ID
   body: String!
   postedBy: UserCreateOneWithoutStoriesInput!
-  hashtags: HashtagCreateManyInput
-  suspended: Boolean!
+  hashtags: HashtagCreateManyWithoutStoriesInput
+  suspended: Boolean
   comments: CommentCreateManyWithoutStoryInput
-  reportes: StoryReportCreateManyWithoutStoryInput
+  reports: StoryReportCreateManyWithoutStoryInput
+  notifications: NotificationCreateManyWithoutStoryInput
+}
+
+input StoryCreateWithoutNotificationsInput {
+  id: ID
+  body: String!
+  postedBy: UserCreateOneWithoutStoriesInput!
+  hashtags: HashtagCreateManyWithoutStoriesInput
+  suspended: Boolean
+  likes: LikeCreateManyWithoutStoryInput
+  comments: CommentCreateManyWithoutStoryInput
+  reports: StoryReportCreateManyWithoutStoryInput
 }
 
 input StoryCreateWithoutPostedByInput {
+  id: ID
   body: String!
-  hashtags: HashtagCreateManyInput
-  suspended: Boolean!
+  hashtags: HashtagCreateManyWithoutStoriesInput
+  suspended: Boolean
   likes: LikeCreateManyWithoutStoryInput
   comments: CommentCreateManyWithoutStoryInput
-  reportes: StoryReportCreateManyWithoutStoryInput
+  reports: StoryReportCreateManyWithoutStoryInput
+  notifications: NotificationCreateManyWithoutStoryInput
 }
 
-input StoryCreateWithoutReportesInput {
+input StoryCreateWithoutReportsInput {
+  id: ID
   body: String!
   postedBy: UserCreateOneWithoutStoriesInput!
-  hashtags: HashtagCreateManyInput
-  suspended: Boolean!
+  hashtags: HashtagCreateManyWithoutStoriesInput
+  suspended: Boolean
   likes: LikeCreateManyWithoutStoryInput
   comments: CommentCreateManyWithoutStoryInput
+  notifications: NotificationCreateManyWithoutStoryInput
 }
 
 type StoryEdge {
@@ -1528,10 +1816,6 @@ enum StoryOrderByInput {
   body_DESC
   suspended_ASC
   suspended_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
 }
 
 type StoryPreviousValues {
@@ -1554,7 +1838,8 @@ type StoryReportConnection {
 }
 
 input StoryReportCreateInput {
-  story: StoryCreateOneWithoutReportesInput!
+  id: ID
+  story: StoryCreateOneWithoutReportsInput!
   reportedBy: UserCreateOneInput!
   reason: String!
 }
@@ -1565,6 +1850,7 @@ input StoryReportCreateManyWithoutStoryInput {
 }
 
 input StoryReportCreateWithoutStoryInput {
+  id: ID
   reportedBy: UserCreateOneInput!
   reason: String!
 }
@@ -1579,10 +1865,6 @@ enum StoryReportOrderByInput {
   id_DESC
   reason_ASC
   reason_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
 }
 
 type StoryReportPreviousValues {
@@ -1643,7 +1925,7 @@ input StoryReportSubscriptionWhereInput {
 }
 
 input StoryReportUpdateInput {
-  story: StoryUpdateOneRequiredWithoutReportesInput
+  story: StoryUpdateOneRequiredWithoutReportsInput
   reportedBy: UserUpdateOneRequiredInput
   reason: String
 }
@@ -1783,24 +2065,15 @@ input StorySubscriptionWhereInput {
   NOT: [StorySubscriptionWhereInput!]
 }
 
-input StoryUpdateDataInput {
-  body: String
-  postedBy: UserUpdateOneRequiredWithoutStoriesInput
-  hashtags: HashtagUpdateManyInput
-  suspended: Boolean
-  likes: LikeUpdateManyWithoutStoryInput
-  comments: CommentUpdateManyWithoutStoryInput
-  reportes: StoryReportUpdateManyWithoutStoryInput
-}
-
 input StoryUpdateInput {
   body: String
   postedBy: UserUpdateOneRequiredWithoutStoriesInput
-  hashtags: HashtagUpdateManyInput
+  hashtags: HashtagUpdateManyWithoutStoriesInput
   suspended: Boolean
   likes: LikeUpdateManyWithoutStoryInput
   comments: CommentUpdateManyWithoutStoryInput
-  reportes: StoryReportUpdateManyWithoutStoryInput
+  reports: StoryReportUpdateManyWithoutStoryInput
+  notifications: NotificationUpdateManyWithoutStoryInput
 }
 
 input StoryUpdateManyDataInput {
@@ -1811,6 +2084,18 @@ input StoryUpdateManyDataInput {
 input StoryUpdateManyMutationInput {
   body: String
   suspended: Boolean
+}
+
+input StoryUpdateManyWithoutHashtagsInput {
+  create: [StoryCreateWithoutHashtagsInput!]
+  delete: [StoryWhereUniqueInput!]
+  connect: [StoryWhereUniqueInput!]
+  set: [StoryWhereUniqueInput!]
+  disconnect: [StoryWhereUniqueInput!]
+  update: [StoryUpdateWithWhereUniqueWithoutHashtagsInput!]
+  upsert: [StoryUpsertWithWhereUniqueWithoutHashtagsInput!]
+  deleteMany: [StoryScalarWhereInput!]
+  updateMany: [StoryUpdateManyWithWhereNestedInput!]
 }
 
 input StoryUpdateManyWithoutPostedByInput {
@@ -1830,13 +2115,6 @@ input StoryUpdateManyWithWhereNestedInput {
   data: StoryUpdateManyDataInput!
 }
 
-input StoryUpdateOneRequiredInput {
-  create: StoryCreateInput
-  update: StoryUpdateDataInput
-  upsert: StoryUpsertNestedInput
-  connect: StoryWhereUniqueInput
-}
-
 input StoryUpdateOneRequiredWithoutCommentsInput {
   create: StoryCreateWithoutCommentsInput
   update: StoryUpdateWithoutCommentsDataInput
@@ -1851,57 +2129,88 @@ input StoryUpdateOneRequiredWithoutLikesInput {
   connect: StoryWhereUniqueInput
 }
 
-input StoryUpdateOneRequiredWithoutReportesInput {
-  create: StoryCreateWithoutReportesInput
-  update: StoryUpdateWithoutReportesDataInput
-  upsert: StoryUpsertWithoutReportesInput
+input StoryUpdateOneRequiredWithoutNotificationsInput {
+  create: StoryCreateWithoutNotificationsInput
+  update: StoryUpdateWithoutNotificationsDataInput
+  upsert: StoryUpsertWithoutNotificationsInput
+  connect: StoryWhereUniqueInput
+}
+
+input StoryUpdateOneRequiredWithoutReportsInput {
+  create: StoryCreateWithoutReportsInput
+  update: StoryUpdateWithoutReportsDataInput
+  upsert: StoryUpsertWithoutReportsInput
   connect: StoryWhereUniqueInput
 }
 
 input StoryUpdateWithoutCommentsDataInput {
   body: String
   postedBy: UserUpdateOneRequiredWithoutStoriesInput
-  hashtags: HashtagUpdateManyInput
+  hashtags: HashtagUpdateManyWithoutStoriesInput
   suspended: Boolean
   likes: LikeUpdateManyWithoutStoryInput
-  reportes: StoryReportUpdateManyWithoutStoryInput
+  reports: StoryReportUpdateManyWithoutStoryInput
+  notifications: NotificationUpdateManyWithoutStoryInput
+}
+
+input StoryUpdateWithoutHashtagsDataInput {
+  body: String
+  postedBy: UserUpdateOneRequiredWithoutStoriesInput
+  suspended: Boolean
+  likes: LikeUpdateManyWithoutStoryInput
+  comments: CommentUpdateManyWithoutStoryInput
+  reports: StoryReportUpdateManyWithoutStoryInput
+  notifications: NotificationUpdateManyWithoutStoryInput
 }
 
 input StoryUpdateWithoutLikesDataInput {
   body: String
   postedBy: UserUpdateOneRequiredWithoutStoriesInput
-  hashtags: HashtagUpdateManyInput
+  hashtags: HashtagUpdateManyWithoutStoriesInput
   suspended: Boolean
   comments: CommentUpdateManyWithoutStoryInput
-  reportes: StoryReportUpdateManyWithoutStoryInput
+  reports: StoryReportUpdateManyWithoutStoryInput
+  notifications: NotificationUpdateManyWithoutStoryInput
+}
+
+input StoryUpdateWithoutNotificationsDataInput {
+  body: String
+  postedBy: UserUpdateOneRequiredWithoutStoriesInput
+  hashtags: HashtagUpdateManyWithoutStoriesInput
+  suspended: Boolean
+  likes: LikeUpdateManyWithoutStoryInput
+  comments: CommentUpdateManyWithoutStoryInput
+  reports: StoryReportUpdateManyWithoutStoryInput
 }
 
 input StoryUpdateWithoutPostedByDataInput {
   body: String
-  hashtags: HashtagUpdateManyInput
+  hashtags: HashtagUpdateManyWithoutStoriesInput
   suspended: Boolean
   likes: LikeUpdateManyWithoutStoryInput
   comments: CommentUpdateManyWithoutStoryInput
-  reportes: StoryReportUpdateManyWithoutStoryInput
+  reports: StoryReportUpdateManyWithoutStoryInput
+  notifications: NotificationUpdateManyWithoutStoryInput
 }
 
-input StoryUpdateWithoutReportesDataInput {
+input StoryUpdateWithoutReportsDataInput {
   body: String
   postedBy: UserUpdateOneRequiredWithoutStoriesInput
-  hashtags: HashtagUpdateManyInput
+  hashtags: HashtagUpdateManyWithoutStoriesInput
   suspended: Boolean
   likes: LikeUpdateManyWithoutStoryInput
   comments: CommentUpdateManyWithoutStoryInput
+  notifications: NotificationUpdateManyWithoutStoryInput
+}
+
+input StoryUpdateWithWhereUniqueWithoutHashtagsInput {
+  where: StoryWhereUniqueInput!
+  data: StoryUpdateWithoutHashtagsDataInput!
 }
 
 input StoryUpdateWithWhereUniqueWithoutPostedByInput {
   where: StoryWhereUniqueInput!
   data: StoryUpdateWithoutPostedByDataInput!
-}
-
-input StoryUpsertNestedInput {
-  update: StoryUpdateDataInput!
-  create: StoryCreateInput!
 }
 
 input StoryUpsertWithoutCommentsInput {
@@ -1914,9 +2223,20 @@ input StoryUpsertWithoutLikesInput {
   create: StoryCreateWithoutLikesInput!
 }
 
-input StoryUpsertWithoutReportesInput {
-  update: StoryUpdateWithoutReportesDataInput!
-  create: StoryCreateWithoutReportesInput!
+input StoryUpsertWithoutNotificationsInput {
+  update: StoryUpdateWithoutNotificationsDataInput!
+  create: StoryCreateWithoutNotificationsInput!
+}
+
+input StoryUpsertWithoutReportsInput {
+  update: StoryUpdateWithoutReportsDataInput!
+  create: StoryCreateWithoutReportsInput!
+}
+
+input StoryUpsertWithWhereUniqueWithoutHashtagsInput {
+  where: StoryWhereUniqueInput!
+  update: StoryUpdateWithoutHashtagsDataInput!
+  create: StoryCreateWithoutHashtagsInput!
 }
 
 input StoryUpsertWithWhereUniqueWithoutPostedByInput {
@@ -1966,9 +2286,12 @@ input StoryWhereInput {
   comments_every: CommentWhereInput
   comments_some: CommentWhereInput
   comments_none: CommentWhereInput
-  reportes_every: StoryReportWhereInput
-  reportes_some: StoryReportWhereInput
-  reportes_none: StoryReportWhereInput
+  reports_every: StoryReportWhereInput
+  reports_some: StoryReportWhereInput
+  reports_none: StoryReportWhereInput
+  notifications_every: NotificationWhereInput
+  notifications_some: NotificationWhereInput
+  notifications_none: NotificationWhereInput
   AND: [StoryWhereInput!]
   OR: [StoryWhereInput!]
   NOT: [StoryWhereInput!]
@@ -1980,9 +2303,9 @@ input StoryWhereUniqueInput {
 
 type Subscription {
   comment(where: CommentSubscriptionWhereInput): CommentSubscriptionPayload
+  device(where: DeviceSubscriptionWhereInput): DeviceSubscriptionPayload
   feedback(where: FeedbackSubscriptionWhereInput): FeedbackSubscriptionPayload
   hashtag(where: HashtagSubscriptionWhereInput): HashtagSubscriptionPayload
-  info(where: InfoSubscriptionWhereInput): InfoSubscriptionPayload
   like(where: LikeSubscriptionWhereInput): LikeSubscriptionPayload
   message(where: MessageSubscriptionWhereInput): MessageSubscriptionPayload
   notification(where: NotificationSubscriptionWhereInput): NotificationSubscriptionPayload
@@ -1997,12 +2320,15 @@ type User {
   username: String!
   password: String!
   email: String!
-  role: Role!
+  role: String!
   verified: Boolean!
   banned: Boolean!
   hashtags(where: HashtagWhereInput, orderBy: HashtagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Hashtag!]
+  createdHashtags(where: HashtagWhereInput, orderBy: HashtagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Hashtag!]
   stories(where: StoryWhereInput, orderBy: StoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Story!]
-  info(where: InfoWhereInput, orderBy: InfoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Info!]
+  device(where: DeviceWhereInput, orderBy: DeviceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Device!]
+  language: String!
+  feedbacks(where: FeedbackWhereInput, orderBy: FeedbackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Feedback!]
 }
 
 type UserConnection {
@@ -2012,15 +2338,29 @@ type UserConnection {
 }
 
 input UserCreateInput {
+  id: ID
   username: String!
   password: String!
   email: String!
-  role: Role
+  role: String
   verified: Boolean
   banned: Boolean
-  hashtags: HashtagCreateManyWithoutModeratorInput
+  hashtags: HashtagCreateManyWithoutFollowedByInput
+  createdHashtags: HashtagCreateManyWithoutAddedByInput
   stories: StoryCreateManyWithoutPostedByInput
-  info: InfoCreateManyInput
+  device: DeviceCreateManyWithoutAccountInput
+  language: String
+  feedbacks: FeedbackCreateManyWithoutSentByInput
+}
+
+input UserCreateManyInput {
+  create: [UserCreateInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateManyWithoutHashtagsInput {
+  create: [UserCreateWithoutHashtagsInput!]
+  connect: [UserWhereUniqueInput!]
 }
 
 input UserCreateOneInput {
@@ -2028,8 +2368,18 @@ input UserCreateOneInput {
   connect: UserWhereUniqueInput
 }
 
-input UserCreateOneWithoutHashtagsInput {
-  create: UserCreateWithoutHashtagsInput
+input UserCreateOneWithoutCreatedHashtagsInput {
+  create: UserCreateWithoutCreatedHashtagsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutDeviceInput {
+  create: UserCreateWithoutDeviceInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutFeedbacksInput {
+  create: UserCreateWithoutFeedbacksInput
   connect: UserWhereUniqueInput
 }
 
@@ -2038,26 +2388,79 @@ input UserCreateOneWithoutStoriesInput {
   connect: UserWhereUniqueInput
 }
 
-input UserCreateWithoutHashtagsInput {
+input UserCreateWithoutCreatedHashtagsInput {
+  id: ID
   username: String!
   password: String!
   email: String!
-  role: Role
+  role: String
   verified: Boolean
   banned: Boolean
+  hashtags: HashtagCreateManyWithoutFollowedByInput
   stories: StoryCreateManyWithoutPostedByInput
-  info: InfoCreateManyInput
+  device: DeviceCreateManyWithoutAccountInput
+  language: String
+  feedbacks: FeedbackCreateManyWithoutSentByInput
+}
+
+input UserCreateWithoutDeviceInput {
+  id: ID
+  username: String!
+  password: String!
+  email: String!
+  role: String
+  verified: Boolean
+  banned: Boolean
+  hashtags: HashtagCreateManyWithoutFollowedByInput
+  createdHashtags: HashtagCreateManyWithoutAddedByInput
+  stories: StoryCreateManyWithoutPostedByInput
+  language: String
+  feedbacks: FeedbackCreateManyWithoutSentByInput
+}
+
+input UserCreateWithoutFeedbacksInput {
+  id: ID
+  username: String!
+  password: String!
+  email: String!
+  role: String
+  verified: Boolean
+  banned: Boolean
+  hashtags: HashtagCreateManyWithoutFollowedByInput
+  createdHashtags: HashtagCreateManyWithoutAddedByInput
+  stories: StoryCreateManyWithoutPostedByInput
+  device: DeviceCreateManyWithoutAccountInput
+  language: String
+}
+
+input UserCreateWithoutHashtagsInput {
+  id: ID
+  username: String!
+  password: String!
+  email: String!
+  role: String
+  verified: Boolean
+  banned: Boolean
+  createdHashtags: HashtagCreateManyWithoutAddedByInput
+  stories: StoryCreateManyWithoutPostedByInput
+  device: DeviceCreateManyWithoutAccountInput
+  language: String
+  feedbacks: FeedbackCreateManyWithoutSentByInput
 }
 
 input UserCreateWithoutStoriesInput {
+  id: ID
   username: String!
   password: String!
   email: String!
-  role: Role
+  role: String
   verified: Boolean
   banned: Boolean
-  hashtags: HashtagCreateManyWithoutModeratorInput
-  info: InfoCreateManyInput
+  hashtags: HashtagCreateManyWithoutFollowedByInput
+  createdHashtags: HashtagCreateManyWithoutAddedByInput
+  device: DeviceCreateManyWithoutAccountInput
+  language: String
+  feedbacks: FeedbackCreateManyWithoutSentByInput
 }
 
 type UserEdge {
@@ -2080,10 +2483,8 @@ enum UserOrderByInput {
   verified_DESC
   banned_ASC
   banned_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
+  language_ASC
+  language_DESC
 }
 
 type UserPreviousValues {
@@ -2091,9 +2492,104 @@ type UserPreviousValues {
   username: String!
   password: String!
   email: String!
-  role: Role!
+  role: String!
   verified: Boolean!
   banned: Boolean!
+  language: String!
+}
+
+input UserScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  username: String
+  username_not: String
+  username_in: [String!]
+  username_not_in: [String!]
+  username_lt: String
+  username_lte: String
+  username_gt: String
+  username_gte: String
+  username_contains: String
+  username_not_contains: String
+  username_starts_with: String
+  username_not_starts_with: String
+  username_ends_with: String
+  username_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  role: String
+  role_not: String
+  role_in: [String!]
+  role_not_in: [String!]
+  role_lt: String
+  role_lte: String
+  role_gt: String
+  role_gte: String
+  role_contains: String
+  role_not_contains: String
+  role_starts_with: String
+  role_not_starts_with: String
+  role_ends_with: String
+  role_not_ends_with: String
+  verified: Boolean
+  verified_not: Boolean
+  banned: Boolean
+  banned_not: Boolean
+  language: String
+  language_not: String
+  language_in: [String!]
+  language_not_in: [String!]
+  language_lt: String
+  language_lte: String
+  language_gt: String
+  language_gte: String
+  language_contains: String
+  language_not_contains: String
+  language_starts_with: String
+  language_not_starts_with: String
+  language_ends_with: String
+  language_not_ends_with: String
+  AND: [UserScalarWhereInput!]
+  OR: [UserScalarWhereInput!]
+  NOT: [UserScalarWhereInput!]
 }
 
 type UserSubscriptionPayload {
@@ -2118,42 +2614,79 @@ input UserUpdateDataInput {
   username: String
   password: String
   email: String
-  role: Role
+  role: String
   verified: Boolean
   banned: Boolean
-  hashtags: HashtagUpdateManyWithoutModeratorInput
+  hashtags: HashtagUpdateManyWithoutFollowedByInput
+  createdHashtags: HashtagUpdateManyWithoutAddedByInput
   stories: StoryUpdateManyWithoutPostedByInput
-  info: InfoUpdateManyInput
+  device: DeviceUpdateManyWithoutAccountInput
+  language: String
+  feedbacks: FeedbackUpdateManyWithoutSentByInput
 }
 
 input UserUpdateInput {
   username: String
   password: String
   email: String
-  role: Role
+  role: String
   verified: Boolean
   banned: Boolean
-  hashtags: HashtagUpdateManyWithoutModeratorInput
+  hashtags: HashtagUpdateManyWithoutFollowedByInput
+  createdHashtags: HashtagUpdateManyWithoutAddedByInput
   stories: StoryUpdateManyWithoutPostedByInput
-  info: InfoUpdateManyInput
+  device: DeviceUpdateManyWithoutAccountInput
+  language: String
+  feedbacks: FeedbackUpdateManyWithoutSentByInput
+}
+
+input UserUpdateManyDataInput {
+  username: String
+  password: String
+  email: String
+  role: String
+  verified: Boolean
+  banned: Boolean
+  language: String
+}
+
+input UserUpdateManyInput {
+  create: [UserCreateInput!]
+  update: [UserUpdateWithWhereUniqueNestedInput!]
+  upsert: [UserUpsertWithWhereUniqueNestedInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
 }
 
 input UserUpdateManyMutationInput {
   username: String
   password: String
   email: String
-  role: Role
+  role: String
   verified: Boolean
   banned: Boolean
+  language: String
 }
 
-input UserUpdateOneInput {
-  create: UserCreateInput
-  update: UserUpdateDataInput
-  upsert: UserUpsertNestedInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: UserWhereUniqueInput
+input UserUpdateManyWithoutHashtagsInput {
+  create: [UserCreateWithoutHashtagsInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutHashtagsInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutHashtagsInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+}
+
+input UserUpdateManyWithWhereNestedInput {
+  where: UserScalarWhereInput!
+  data: UserUpdateManyDataInput!
 }
 
 input UserUpdateOneRequiredInput {
@@ -2163,10 +2696,17 @@ input UserUpdateOneRequiredInput {
   connect: UserWhereUniqueInput
 }
 
-input UserUpdateOneRequiredWithoutHashtagsInput {
-  create: UserCreateWithoutHashtagsInput
-  update: UserUpdateWithoutHashtagsDataInput
-  upsert: UserUpsertWithoutHashtagsInput
+input UserUpdateOneRequiredWithoutCreatedHashtagsInput {
+  create: UserCreateWithoutCreatedHashtagsInput
+  update: UserUpdateWithoutCreatedHashtagsDataInput
+  upsert: UserUpsertWithoutCreatedHashtagsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateOneRequiredWithoutDeviceInput {
+  create: UserCreateWithoutDeviceInput
+  update: UserUpdateWithoutDeviceDataInput
+  upsert: UserUpsertWithoutDeviceInput
   connect: UserWhereUniqueInput
 }
 
@@ -2177,26 +2717,93 @@ input UserUpdateOneRequiredWithoutStoriesInput {
   connect: UserWhereUniqueInput
 }
 
+input UserUpdateOneWithoutFeedbacksInput {
+  create: UserCreateWithoutFeedbacksInput
+  update: UserUpdateWithoutFeedbacksDataInput
+  upsert: UserUpsertWithoutFeedbacksInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateWithoutCreatedHashtagsDataInput {
+  username: String
+  password: String
+  email: String
+  role: String
+  verified: Boolean
+  banned: Boolean
+  hashtags: HashtagUpdateManyWithoutFollowedByInput
+  stories: StoryUpdateManyWithoutPostedByInput
+  device: DeviceUpdateManyWithoutAccountInput
+  language: String
+  feedbacks: FeedbackUpdateManyWithoutSentByInput
+}
+
+input UserUpdateWithoutDeviceDataInput {
+  username: String
+  password: String
+  email: String
+  role: String
+  verified: Boolean
+  banned: Boolean
+  hashtags: HashtagUpdateManyWithoutFollowedByInput
+  createdHashtags: HashtagUpdateManyWithoutAddedByInput
+  stories: StoryUpdateManyWithoutPostedByInput
+  language: String
+  feedbacks: FeedbackUpdateManyWithoutSentByInput
+}
+
+input UserUpdateWithoutFeedbacksDataInput {
+  username: String
+  password: String
+  email: String
+  role: String
+  verified: Boolean
+  banned: Boolean
+  hashtags: HashtagUpdateManyWithoutFollowedByInput
+  createdHashtags: HashtagUpdateManyWithoutAddedByInput
+  stories: StoryUpdateManyWithoutPostedByInput
+  device: DeviceUpdateManyWithoutAccountInput
+  language: String
+}
+
 input UserUpdateWithoutHashtagsDataInput {
   username: String
   password: String
   email: String
-  role: Role
+  role: String
   verified: Boolean
   banned: Boolean
+  createdHashtags: HashtagUpdateManyWithoutAddedByInput
   stories: StoryUpdateManyWithoutPostedByInput
-  info: InfoUpdateManyInput
+  device: DeviceUpdateManyWithoutAccountInput
+  language: String
+  feedbacks: FeedbackUpdateManyWithoutSentByInput
 }
 
 input UserUpdateWithoutStoriesDataInput {
   username: String
   password: String
   email: String
-  role: Role
+  role: String
   verified: Boolean
   banned: Boolean
-  hashtags: HashtagUpdateManyWithoutModeratorInput
-  info: InfoUpdateManyInput
+  hashtags: HashtagUpdateManyWithoutFollowedByInput
+  createdHashtags: HashtagUpdateManyWithoutAddedByInput
+  device: DeviceUpdateManyWithoutAccountInput
+  language: String
+  feedbacks: FeedbackUpdateManyWithoutSentByInput
+}
+
+input UserUpdateWithWhereUniqueNestedInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateDataInput!
+}
+
+input UserUpdateWithWhereUniqueWithoutHashtagsInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutHashtagsDataInput!
 }
 
 input UserUpsertNestedInput {
@@ -2204,14 +2811,36 @@ input UserUpsertNestedInput {
   create: UserCreateInput!
 }
 
-input UserUpsertWithoutHashtagsInput {
-  update: UserUpdateWithoutHashtagsDataInput!
-  create: UserCreateWithoutHashtagsInput!
+input UserUpsertWithoutCreatedHashtagsInput {
+  update: UserUpdateWithoutCreatedHashtagsDataInput!
+  create: UserCreateWithoutCreatedHashtagsInput!
+}
+
+input UserUpsertWithoutDeviceInput {
+  update: UserUpdateWithoutDeviceDataInput!
+  create: UserCreateWithoutDeviceInput!
+}
+
+input UserUpsertWithoutFeedbacksInput {
+  update: UserUpdateWithoutFeedbacksDataInput!
+  create: UserCreateWithoutFeedbacksInput!
 }
 
 input UserUpsertWithoutStoriesInput {
   update: UserUpdateWithoutStoriesDataInput!
   create: UserCreateWithoutStoriesInput!
+}
+
+input UserUpsertWithWhereUniqueNestedInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutHashtagsInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutHashtagsDataInput!
+  create: UserCreateWithoutHashtagsInput!
 }
 
 input UserWhereInput {
@@ -2271,10 +2900,20 @@ input UserWhereInput {
   email_not_starts_with: String
   email_ends_with: String
   email_not_ends_with: String
-  role: Role
-  role_not: Role
-  role_in: [Role!]
-  role_not_in: [Role!]
+  role: String
+  role_not: String
+  role_in: [String!]
+  role_not_in: [String!]
+  role_lt: String
+  role_lte: String
+  role_gt: String
+  role_gte: String
+  role_contains: String
+  role_not_contains: String
+  role_starts_with: String
+  role_not_starts_with: String
+  role_ends_with: String
+  role_not_ends_with: String
   verified: Boolean
   verified_not: Boolean
   banned: Boolean
@@ -2282,12 +2921,32 @@ input UserWhereInput {
   hashtags_every: HashtagWhereInput
   hashtags_some: HashtagWhereInput
   hashtags_none: HashtagWhereInput
+  createdHashtags_every: HashtagWhereInput
+  createdHashtags_some: HashtagWhereInput
+  createdHashtags_none: HashtagWhereInput
   stories_every: StoryWhereInput
   stories_some: StoryWhereInput
   stories_none: StoryWhereInput
-  info_every: InfoWhereInput
-  info_some: InfoWhereInput
-  info_none: InfoWhereInput
+  device_every: DeviceWhereInput
+  device_some: DeviceWhereInput
+  device_none: DeviceWhereInput
+  language: String
+  language_not: String
+  language_in: [String!]
+  language_not_in: [String!]
+  language_lt: String
+  language_lte: String
+  language_gt: String
+  language_gte: String
+  language_contains: String
+  language_not_contains: String
+  language_starts_with: String
+  language_not_starts_with: String
+  language_ends_with: String
+  language_not_ends_with: String
+  feedbacks_every: FeedbackWhereInput
+  feedbacks_some: FeedbackWhereInput
+  feedbacks_none: FeedbackWhereInput
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]
@@ -2312,6 +2971,7 @@ type VideoConnection {
 }
 
 input VideoCreateInput {
+  id: ID
   link: String!
   sentBy: UserCreateOneInput!
 }
@@ -2326,10 +2986,6 @@ enum VideoOrderByInput {
   id_DESC
   link_ASC
   link_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
 }
 
 type VideoPreviousValues {

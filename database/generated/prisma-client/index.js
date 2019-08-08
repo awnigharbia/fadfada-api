@@ -9,10 +9,6 @@ var models = [
     embedded: false
   },
   {
-    name: "Role",
-    embedded: false
-  },
-  {
     name: "Hashtag",
     embedded: false
   },
@@ -49,7 +45,7 @@ var models = [
     embedded: false
   },
   {
-    name: "Info",
+    name: "Device",
     embedded: false
   }
 ];

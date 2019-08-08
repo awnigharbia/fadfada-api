@@ -6,8 +6,3 @@ generate:
     output: ./generated/prisma-client/schema.graphql
   - generator: javascript-client
     output: ./generated/prisma-client/
-
-hooks:
-  post-deploy:
-    - graphql get-schema -p prisma
-    - prisma generate

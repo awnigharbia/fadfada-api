@@ -1,22 +1,52 @@
 import {GraphQLServer} from 'graphql-yoga'
 import {prisma} from '../database/generated/prisma-client'
-import Query from './resolvers/query'
-import Mutation from './resolvers/mutation'
+import * as Query from './resolvers/query'
+import * as Mutation from './resolvers/mutation'
+import * as Subscription from './resolvers/subscriptions/resolve'
+
+import {
+  User,
+  Feedback,
+  Hashtag,
+  Story,
+  StoryReport,
+  Video,
+  Message,
+  Like,
+  Device,
+  Notification,
+  Comment,
+} from './resolvers/relations'
 import AuthPayload from './resolvers/AuthPayload'
 import {isAdmin} from './resolvers/middleware'
 
 const resolvers = {
   Query,
   Mutation,
+  Subscription,
+  User,
+  Feedback,
+  Hashtag,
+  Story,
+  Device,
+  StoryReport,
+  Video,
+  Message,
+  Comment,
+  Like,
+  Notification,
   AuthPayload,
 }
 
 const permissions = {
   Query: {
     users: isAdmin,
-    messages: isAdmin,
+    // messages: isAdmin,
     storyReport: isAdmin,
-    feedback: isAdmin,
+    feedbacks: isAdmin,
+  },
+  Mutation: {
+    // createVideo: isAdmin,
   },
 }
 

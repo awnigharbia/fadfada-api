@@ -1,93 +1,94 @@
 type User {
-  id: ID! @unique
+  id: ID! @id @unique
   username: String! @unique
   password: String!
   email: String! @unique
-  role: Role! @default(value: "USER")
-  verified: Boolean! @default(value: "false")
-  banned: Boolean! @default(value: "true")
-  hashtags: [Hashtag!] @relation(name: "Moderator")
-  stories: [Story!]
-  info: [Info!]
-}
-
-enum Role {
-  ADMIN
-  USER
-  MOD
+  role: String! @default(value: "USER")
+  verified: Boolean! @default(value: false)
+  banned: Boolean! @default(value: true)
+  hashtags: [Hashtag!]@relation(name:"Followed", onDelete:SET_NULL)
+  createdHashtags:[Hashtag!] @relation(name:"Creator", onDelete:SET_NULL)
+  stories: [Story!] @relation(name:"Author", onDelete:SET_NULL)
+  device: [Device!]
+  language:String! @default(value: "en-GB")
+  feedbacks: [Feedback!]!
 }
 
 type Hashtag {
-  id: ID! @unique
-  title: String!
-  moderator: User! @relation(name: "Moderator")
-  addedBy: User! @relation(name: "Creator")
+  id: ID! @id @unique
+  title: String! @unique
+  stories: [Story!]! @relation(name:"Hashtags", onDelete:SET_NULL)
+  moderator: [User!] @relation(name:"Moderator", onDelete:SET_NULL)
+  followedBy:[User!] @relation(name:"Followed", onDelete:SET_NULL)
+  addedBy: User! @relation(name:"Creator", onDelete:SET_NULL)
 }
 
 type Story {
-  id: ID! @unique
+  id: ID! @id @unique
   body: String!
-  postedBy: User!
-  hashtags: [Hashtag!]!
-  suspended: Boolean!
-  likes: [Like!]!
-  comments: [Comment!]!
-  reportes: [StoryReport!]!
+  postedBy: User!  @relation(name:"Author", onDelete:SET_NULL)
+  hashtags: [Hashtag!]! @relation(name:"Hashtags", onDelete:SET_NULL)
+  suspended: Boolean! @default(value: false)
+  likes: [Like!]  @relation(name:"Likes", onDelete:CASCADE)
+  comments: [Comment!] @relation(name:"Comment", onDelete:CASCADE)
+  reports: [StoryReport!] @relation(name:"Report", onDelete:CASCADE)
+  notifications:[Notification!]! @relation(name:"Notification", onDelete:CASCADE)
 }
 
 type Feedback {
-  id: ID! @unique
-  title: String!
+  id: ID! @id @unique
+  topic: String!
   description: String!
   sentBy: User
 }
 
 type StoryReport {
-  id: ID! @unique
-  story: Story!
+  id: ID! @id @unique
+  story: Story! @relation(name:"Report", onDelete:SET_NULL)
   reportedBy: User!
-  reason: String!
+  reason: String! 
 }
 
 type Message {
-  id: ID! @unique
+  id: ID! @id @unique
   body: String!
   sentBy: User!
 }
 
 type Video {
-  id: ID! @unique
+  id: ID! @id @unique
   link: String!
   sentBy: User!
 }
 
 type Notification {
-  id: ID! @unique
-  story: Story!
+  id: ID! @id @unique
+  story: Story! @relation(name:"Notification", onDelete:SET_NULL)
   sender: User! @relation(name: "Sender")
-  receiver: User! @relation(name: "Receiver")
-  body: String!
+  code: String!
+  seen:Boolean! @default(value: false)
 }
 
 type Comment {
-  id: ID! @unique
+  id: ID! @id @unique
   body: String!
-  story: Story!
-  commentedBy: User!
+  story: Story! @relation(name:"Comment", onDelete:SET_NULL)
+  commentedBy: User! 
 }
 
 type Like {
-  id: ID! @unique
-  story: Story!
+  id: ID! @id @unique
+  story: Story! @relation(name:"Likes", onDelete:SET_NULL)
   likedBy: User!
 }
 
-type Info {
-  id: ID! @unique
+type Device {
+  id: ID! @id @unique
   browser: String!
   ip: String!
   os: String!
   country: String!
   language: String!
   zip: String!
+  account: User!
 }
